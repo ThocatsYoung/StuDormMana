@@ -5,6 +5,7 @@
 #include <QString>
 #include <QDateTime>
 #include <people.h>
+#include <QDataStream>
 //取消基类room，直接编写将其派生类宿舍与活动室作为两个独立类编写
 //dorm 可能会改为类模板
 class dorm
@@ -20,17 +21,16 @@ public:
          double wf, double ef);
 
     /*属性获取函数*/
-    quint32& GetDormNumber() const;
-    quint8& GetMaxNumber() const;
-    quint8& GetNowNumber() const;
-    double& GetWaterFee() const;
-    double& GetElecFee() const;
+    const quint32& GetDormNumber();
+    const quint8& GetMaxNumber();
+    const quint8& GetNowNumber();
+    const double& GetWaterFee();
+    const double& GetElecFee();
 
     /*水电费设置函数*/
     void setWaterFee(double fee = 0.0); //设置水费，默认设为0
     void setElecFee(double fee = 0.0);  //设置电费，默认设为0
-    double PayWater(double pay);    //所欠水费减去pay
-    double PayElec(double pay); //所欠电费减去pay
+
 
     //人员操作
     void add(student& stu);  //加人

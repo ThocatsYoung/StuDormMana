@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1082</width>
-    <height>660</height>
+    <width>1093</width>
+    <height>666</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,11 +19,23 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1061</width>
-      <height>591</height>
+      <width>1081</width>
+      <height>601</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <property name="rightMargin">
+      <number>10</number>
+     </property>
+     <property name="bottomMargin">
+      <number>10</number>
+     </property>
      <item>
       <widget class="QGroupBox" name="groupBox">
        <property name="title">
@@ -34,22 +46,25 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>316</width>
+          <width>336</width>
           <height>571</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>7</number>
+         </property>
          <property name="leftMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="topMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="rightMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <property name="bottomMargin">
-          <number>10</number>
+          <number>20</number>
          </property>
          <item>
           <widget class="QCalendarWidget" name="calendarWidget">
@@ -66,9 +81,186 @@
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="listWidget"/>
+          <widget class="QListWidget" name="todolistWidget"/>
          </item>
         </layout>
+       </widget>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>10</y>
+          <width>701</width>
+          <height>561</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="InformationPage">
+         <widget class="QTabWidget" name="InformationTabWidget">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>20</y>
+            <width>701</width>
+            <height>541</height>
+           </rect>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="studentTab">
+           <attribute name="title">
+            <string>学生信息</string>
+           </attribute>
+           <widget class="QWidget" name="horizontalLayoutWidget_2">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>671</width>
+              <height>501</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="leftMargin">
+              <number>10</number>
+             </property>
+             <property name="topMargin">
+              <number>10</number>
+             </property>
+             <property name="rightMargin">
+              <number>10</number>
+             </property>
+             <property name="bottomMargin">
+              <number>10</number>
+             </property>
+             <item>
+              <widget class="QTreeView" name="treeView"/>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_2">
+               <property name="title">
+                <string>GroupBox</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="teacherTab">
+           <attribute name="title">
+            <string>教师信息</string>
+           </attribute>
+           <widget class="QWidget" name="horizontalLayoutWidget_3">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>671</width>
+              <height>491</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="leftMargin">
+              <number>10</number>
+             </property>
+             <property name="topMargin">
+              <number>10</number>
+             </property>
+             <property name="rightMargin">
+              <number>10</number>
+             </property>
+             <property name="bottomMargin">
+              <number>10</number>
+             </property>
+             <item>
+              <widget class="QListView" name="listView"/>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_3">
+               <property name="title">
+                <string>GroupBox</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>91</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>人员信息管理</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="ManagePage">
+         <widget class="QTabWidget" name="MangeTabWidget">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>691</width>
+            <height>531</height>
+           </rect>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="PlayroomsManageTab">
+           <attribute name="title">
+            <string>活动室管理</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="GoAndLeaveTab">
+           <attribute name="title">
+            <string>留校/离校登记</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="RepairTab">
+           <attribute name="title">
+            <string>维修申请登记</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="OutsiderComeTab">
+           <attribute name="title">
+            <string>外访登记</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="ThingsMangeTab">
+           <attribute name="title">
+            <string>公用物品管理</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="RuleBreakRecordTab">
+           <attribute name="title">
+            <string>违纪登记</string>
+           </attribute>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>71</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>功能管理</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
      </item>
@@ -80,7 +272,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1082</width>
+     <width>1093</width>
      <height>26</height>
     </rect>
    </property>

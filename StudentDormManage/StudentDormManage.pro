@@ -26,13 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     people.cpp \
-    room.cpp
+    room.cpp \
+    student_information_edit_dialog.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
-    room.h
+    room.h \
+    student_information_edit_dialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    student_information_edit_dialog.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro

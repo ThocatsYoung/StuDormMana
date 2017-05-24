@@ -10,20 +10,21 @@
 //dorm 可能会改为类模板
 class dorm
 {
-    quint32 DormNumber; //宿舍号
-    quint8 MaxNumber;   //最大允许居住人数
-    quint8 NowNumber;   //现居人数
+    quint16 DormNumber; //宿舍号
+    quint16 MaxNumber;   //最大允许居住人数
+    quint16 NowNumber;   //现居人数
     double WaterFee;    //水费
     double ElecFee; //电费
     QLinkedList<student> StuDorm;   //居住学生链表
 public:
-    dorm(quint32 DN, quint8 MN, quint8 NN,
-         double wf, double ef);
+    dorm();
+    dorm(quint16 DN, quint16 MN = 4, quint16 NN = 4,
+         double wf = 0.0, double ef = 0.0);
 
     /*属性获取函数*/
-    const quint32& GetDormNumber();
-    const quint8& GetMaxNumber();
-    const quint8& GetNowNumber();
+    const quint16& GetDormNumber();
+    const quint16& GetMaxNumber();
+    const quint16& GetNowNumber();
     const double& GetWaterFee();
     const double& GetElecFee();
 

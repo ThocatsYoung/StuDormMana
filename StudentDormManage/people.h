@@ -1,14 +1,17 @@
 #ifndef PEOPLE_H
 #define PEOPLE_H
 
+#include <QDateTime>
+#include <QString>
+#include <QDataStream>
 
 //在构造函数中没有设置数据合法性检查，该功能设置在 添删改 的功能模块中
 //由于大量使用了Qt基类，无需使用动态内存分配，故构造函数中无参数构造内容为空，同时复制构造函数均由编译器自动生成
 
-//重载运算符<<,>>实现待争议
+//重载运算符<<、>>实现待争议
 //部分属性设置函数将在以后编写
 //QString 不改了
-//放弃外租人员类
+//放弃外租人员类，教师类
 
 //基类_人
 class people
@@ -62,62 +65,44 @@ public:
 //住宿人员<-人
 class resident:public people
 {
-    quint32 DormNumber; //宿舍号
+    quint16 DormNumber; //宿舍号
     QDate ComeInDate;   //入住时间
     QString IdNumber;   //身份证号
 public:
     resident();
     resident(const QString na, bool sex, const QString &contact,
-             quint32 dN, QDate comein, QString id);
+             quint16 dN, QDate comein, QString id);
 
     /*属性值获取函数*/
     const QDate& GetComeInDate();
     const QString& GetIdNumber();
-    const quint32& GetDormNumber();
+    const quint16& GetDormNumber();
 
     //输入输出运算符重载
     friend QDataStream &operator <<(QDataStream &out, const resident &res);
     friend QDataStream &operator >>(QDataStream &in, resident &res);
 };
 
-//班级(学生类子类)
-//后续实现:打算用另外文件存储 班级的静态多维数组 。
-class banji //由于与class关键字冲突，使用拼音命名
-{
-public:
-    quint8 Grade;   //年级
-    QString Major;  //专业
-    quint8 BanJiHao;    //班级号
-    banji(quint8 g, QString m, quint8 bjh);
-    banji();
-
-    /*属性值获取函数*/
-    const quint8& GetGrade();
-    const quint8& GetBanJiHao();
-    const QString& GetMajor();
-
-    //输入输出运算符重载
-    friend QDataStream &operator <<(QDataStream &out, const banji &ban);
-    friend QDataStream &operator >>(QDataStream &in, banji &ban);
-};
 
 //学生<-住宿人员<-人
 class student: public resident
 {
     QString StudentId;  //学号
-    banji BanJi;    //班级
+    quint16 XueYuan;  //学院编号，用类静态字符串Map下标访问
+    quint16 BanJi;  //班级编号，用类静态字符串Map下标访问
     bool InSchool;  //是否在校
     QDate LastGoTime;   //最近一次离开时间
     QDate LastBackTime; //最近一次归校时间
 public:
     student();
     student(const QString &na, bool sex, const QString &contact,
-            quint32 dN, QDate &comein, QString &id,
-            QString &stuid,banji &bj);
+            quint16 dN, QDate &comein, QString &id,
+            QString &stuid,quint16 &xueyuan, quint16 &bj);
 
     /*属性值获取函数*/
     const QString& GetStudentId();
-    const banji& GetBanJi();
+    const quint16& GetXueYuan();
+    const quint16& GetBanJi();
     const bool& GetInSchool();
     const QDate& GetLastGoTime();
     const QDate& GetLastBackTime();
@@ -131,24 +116,7 @@ public:
     friend QDataStream &operator >>(QDataStream &in, student &stu);
 };
 
-//教职工<-住宿人员<-人 （存疑）
-class teacher:public resident
-{
-    QString Institute;  //学院，可能会改成枚举变量或用类静态数组
-    QString Title;  //职务,可能会改成枚举变量或用类静态数组
-public:
-    teacher(const QString na, bool sex, const QString &contact,
-            quint32 dN, QDate comein, QString id,
-            QString institute, QString title);
-
-    /*属性值获取函数*/
-    const QString& GetInstitute();
-    const QString& GetTitle();
-
-    //输入输出运算符重载
-    friend QDataStream &operator <<(QDataStream &out, const teacher &tea);
-    friend QDataStream &operator >>(QDataStream &in, teacher &tea);
-};
+//教职工<-住宿人员<-人 （暂不使用）
 
 
 #endif // PEOPLE_H

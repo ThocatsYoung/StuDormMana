@@ -2,22 +2,27 @@
 
 //dorm 宿舍类
 
-dorm::dorm(quint32 DN, quint8 MN, quint8 NN, double wf, double ef):
+dorm::dorm()
+{
+
+}
+
+dorm::dorm(quint16 DN, quint16 MN, quint16 NN, double wf, double ef):
     DormNumber(DN), MaxNumber(MN), NowNumber(NN),
     WaterFee(wf), ElecFee(ef){}
 
 
-const quint32 &dorm::GetDormNumber()
+const quint16 &dorm::GetDormNumber()
 {
     return DormNumber;
 }
 
-const quint8 &dorm::GetMaxNumber()
+const quint16 &dorm::GetMaxNumber()
 {
     return MaxNumber;
 }
 
-const quint8 &dorm::GetNowNumber()
+const quint16 &dorm::GetNowNumber()
 {
     return NowNumber;
 }

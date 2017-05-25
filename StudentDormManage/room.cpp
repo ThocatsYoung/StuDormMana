@@ -37,12 +37,12 @@ const double &dorm::GetElecFee()
     return ElecFee;
 }
 
-void dorm::setWaterFee(double fee)
+void dorm::SetWaterFee(double fee)
 {
     WaterFee = fee;
 }
 
-void dorm::setElecFee(double fee)
+void dorm::SetElecFee(double fee)
 {
     ElecFee = fee;
 }
@@ -50,17 +50,19 @@ void dorm::setElecFee(double fee)
 
 void dorm::add(student &stu)
 {
-    StuDorm.push_back(stu);
+    StuDorm.append(stu);
+    NowNumber++;
 }
 
 void dorm::goAway(QLinkedList<student>::iterator stu)
 {
     StuDorm.erase(stu);
+    NowNumber--;
 }
 
 void dorm::moveTo(QLinkedList<student>::iterator stu, dorm &newdorm)
 {
-    newdorm.StuDorm.push_back(*stu);
+    newdorm.StuDorm.append(*stu);
     StuDorm.erase(stu);
 }
 

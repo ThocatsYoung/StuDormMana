@@ -14,7 +14,7 @@ void people::SetContact(const QString &NewContact)
     Contact = NewContact;
     return;
 }
-void people::SetSexuality(bool RealSex)
+void people::SetSexuality(const bool RealSex)
 {
     Sexuality = RealSex;
     return;
@@ -24,7 +24,7 @@ people::people()
 
 }
 
-people::people(const QString &na, bool sex, const QString &contact)
+people::people(const QString &na, const bool sex, const QString &contact)
     :Name(na), Sexuality(sex), Contact(contact)
 {}
 const QString& people::GetContact()
@@ -32,17 +32,6 @@ const QString& people::GetContact()
     return Contact;
 }
 
-QDataStream& operator <<(QDataStream &out, const people &peo)
-{
-    out << peo.Name << peo.Sexuality << peo.Contact;
-    return out;
-}
-
-QDataStream& operator >>(QDataStream &in, people &peo)
-{
-    in >> peo.Name >> peo.Sexuality >> peo.Contact;
-    return in;
-}
 const QString& people::GetName()
 {
     return Name;
@@ -59,7 +48,7 @@ outsider::outsider()
 
 }
 
-outsider::outsider(const QString &na,bool sex, const QString &contact,
+outsider::outsider(const QString &na, const bool sex, const QString &contact,
                    const QDateTime &cometime):
     people(na, sex, contact),ComeTime(cometime), HasGone(false){}
 
@@ -84,15 +73,32 @@ const QDateTime& outsider::GetGoTime()
     return GoTime;
 }
 
-QDataStream & operator <<(QDataStream &out, const outsider &outs)
+void outsider::SetHasGone(const bool hasgone)
 {
-    out << outs.HasGone << outs.ComeTime << outs.GoTime;
+    HasGone = hasgone;
+}
+
+void outsider::SetComeTime(const QDateTime &cometime)
+{
+    ComeTime = cometime;
+}
+
+void outsider::SetGoTime(const QDateTime &gotime)
+{
+    GoTime = gotime;
+}
+
+QDataStream & operator <<(QDataStream &out, const outsider &obj)
+{
+    out << obj.Name << obj.Sexuality << obj.Contact
+        << obj.HasGone << obj.ComeTime << obj.GoTime;
     return out;
 }
 
-QDataStream & operator >>(QDataStream &in, outsider &outs)
+QDataStream & operator >>(QDataStream &in, outsider &obj)
 {
-    in >> outs.HasGone >> outs.ComeTime >> outs.GoTime;
+    in >> obj.Name >> obj.Sexuality >> obj.Contact
+       >> obj.HasGone >> obj.ComeTime >> obj.GoTime;
     return in;
 }
 
@@ -102,8 +108,8 @@ resident::resident()
 
 }
 
-resident::resident(const QString na, bool sex, const QString &contact,
-                   quint16 dN, QDate comein, QString id):
+resident::resident(const QString na, const bool sex, const QString &contact,
+                   const quint16 dN, const QDate comein, const QString id):
     people(na, sex, contact), DormNumber(dN),
     ComeInDate(comein), IdNumber(id){}
 
@@ -122,17 +128,21 @@ const quint16 &resident::GetDormNumber()
     return DormNumber;
 }
 
-QDataStream & operator <<(QDataStream &out, const resident &res)
+void resident::SetDormNumber(const quint16 dorm)
 {
-    out << res.DormNumber << res.ComeInDate << res.IdNumber;
-    return out;
+    DormNumber = dorm;
 }
 
-QDataStream & operator >>(QDataStream &in, resident &res)
+void resident::SetComeInDate(const QDate &comeindate)
 {
-    in >> res.DormNumber >> res.ComeInDate >> res.IdNumber;
-    return in;
+    ComeInDate = comeindate;
 }
+
+void resident::SetIdNumber(const QString &idnumber)
+{
+    IdNumber = idnumber;
+}
+
 
 
 //student 学生类实现
@@ -142,9 +152,9 @@ student::student()
 
 }
 
-student::student(const QString &na, bool sex, const QString &contact,
-                 quint16 dN, QDate &comein, QString &id,
-                 QString &stuid, quint16 &xueyuan, quint16 &bj):
+student::student(const QString &na, const bool sex, const QString &contact,
+                 const quint16 dN, const QDate &comein, const QString &id,
+                 const QString &stuid, const quint16 &xueyuan, const quint16 &bj):
     resident(na, sex, contact, dN, comein, id),
     StudentId(stuid), XueYuan(xueyuan),BanJi(bj),
     LastGoTime(comein), LastBackTime(comein), InSchool(true){}
@@ -179,29 +189,63 @@ const QDate &student::GetLastBackTime()
     return LastBackTime;
 }
 
-void student::leaveSchool(QDate& leaveTime)
+void student::SetStudentId(const QString &stuid)
+{
+    StudentId = stuid;
+}
+
+void student::SetXueYuan(const quint16 xueyuan)
+{
+    XueYuan = xueyuan;
+}
+
+void student::SetBanji(const quint16 banji)
+{
+    BanJi = banji;
+}
+
+void student::SetInSchool(const bool inschool)
+{
+    InSchool = inschool;
+}
+
+void student::SetLastGoTime(const QDate &lastgo)
+{
+    LastGoTime = lastgo;
+}
+
+void student::SetLastBackTime(const QDate &lastback)
+{
+    LastBackTime = lastback;
+}
+
+void student::leaveSchool(const QDate& leaveTime)
 {
     LastGoTime = leaveTime;
     InSchool = false;
 }
 
-void student::backSchool(QDate& backTime)
+void student::backSchool(const QDate& backTime)
 {
     LastBackTime = backTime;
     InSchool = true;
 }
 
-QDataStream & operator <<(QDataStream &out, const student &stu)
+QDataStream & operator <<(QDataStream &out, const student &obj)
 {
-    out << stu.StudentId << stu.XueYuan << stu.BanJi << stu.InSchool
-        << stu.LastGoTime << stu.LastBackTime;
+    out << obj.Name << obj.Sexuality << obj.Contact
+        << obj.DormNumber << obj.ComeInDate << obj.IdNumber
+        << obj.StudentId << obj.XueYuan << obj.BanJi
+        << obj.InSchool << obj.LastGoTime << obj.LastBackTime;
     return out;
 }
 
-QDataStream & operator >>(QDataStream &in, student &stu)
+QDataStream & operator >>(QDataStream &in, student &obj)
 {
-    in >> stu.StudentId >> stu.XueYuan >> stu.BanJi >> stu.InSchool
-       >> stu.LastGoTime >> stu.LastBackTime;
+    in >> obj.Name >> obj.Sexuality >> obj.Contact
+       >> obj.DormNumber >> obj.ComeInDate >> obj.IdNumber
+       >> obj.StudentId >> obj.XueYuan >> obj.BanJi
+       >> obj.InSchool >> obj.LastGoTime >> obj.LastBackTime;
     return in;
 }
 

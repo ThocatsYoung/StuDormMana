@@ -10,15 +10,16 @@
 //dorm 可能会改为类模板
 class dorm
 {
+private:
     quint16 DormNumber; //宿舍号
     quint16 MaxNumber;   //最大允许居住人数
     quint16 NowNumber;   //现居人数
     double WaterFee;    //水费
     double ElecFee; //电费
-    QLinkedList<student> StuDorm;   //居住学生链表
 public:
+    QLinkedList<student> StuDorm;   //居住学生链表
     dorm();
-    dorm(quint16 DN, quint16 MN = 4, quint16 NN = 4,
+    dorm(quint16 DN, quint16 MN = 4, quint16 NN = 0,
          double wf = 0.0, double ef = 0.0);
 
     /*属性获取函数*/
@@ -29,8 +30,8 @@ public:
     const double& GetElecFee();
 
     /*水电费设置函数*/
-    void setWaterFee(double fee = 0.0); //设置水费，默认设为0
-    void setElecFee(double fee = 0.0);  //设置电费，默认设为0
+    void SetWaterFee(double fee = 0.0); //设置水费，默认设为0
+    void SetElecFee(double fee = 0.0);  //设置电费，默认设为0
 
 
     //人员操作
@@ -45,3 +46,4 @@ public:
 };
 
 #endif // ROOM_H
+

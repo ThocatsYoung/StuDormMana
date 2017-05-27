@@ -1,7 +1,7 @@
 #ifndef ROOM_H
 #define ROOM_H
 
-#include <QLinkedList>
+#include <QList>
 #include <QString>
 #include <QDateTime>
 #include <people.h>
@@ -17,17 +17,17 @@ private:
     double WaterFee;    //水费
     double ElecFee; //电费
 public:
-    QLinkedList<student> StuDorm;   //居住学生链表
+    QList<student> StuDorm;   //居住学生链表
     dorm();
     dorm(quint16 DN, quint16 MN = 4, quint16 NN = 0,
          double wf = 0.0, double ef = 0.0);
 
     /*属性获取函数*/
-    const quint16& GetDormNumber();
-    const quint16& GetMaxNumber();
-    const quint16& GetNowNumber();
-    const double& GetWaterFee();
-    const double& GetElecFee();
+    const quint16& GetDormNumber() const;
+    const quint16& GetMaxNumber() const;
+    const quint16& GetNowNumber() const;
+    const double& GetWaterFee() const;
+    const double& GetElecFee() const;
 
     /*水电费设置函数*/
     void SetWaterFee(double fee = 0.0); //设置水费，默认设为0
@@ -36,13 +36,16 @@ public:
 
     //人员操作
     void add(student& stu);  //加人
-    void goAway(QLinkedList<student>::iterator stu); //踢人
-    void moveTo(QLinkedList<student>::iterator stu,
+    void goAway(QList<student>::iterator stu); //踢人
+    void moveTo(QList<student>::iterator stu,
                 dorm& newdorm);    //移动学生到其他宿舍
 
     //输入输出运算符重载
     friend QDataStream &operator <<(QDataStream &out, const dorm &dor);
     friend QDataStream &operator >>(QDataStream &in, dorm &dor);
+
+    //比较运算符重载
+    friend bool operator <(dorm &a,dorm &b);
 };
 
 #endif // ROOM_H

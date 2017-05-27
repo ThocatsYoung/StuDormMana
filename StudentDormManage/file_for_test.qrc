@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/dats">
+        <file>dorm_information.dat</file>
+    </qresource>
+</RCC>

@@ -12,27 +12,27 @@ dorm::dorm(quint16 DN, quint16 MN, quint16 NN, double wf, double ef):
     WaterFee(wf), ElecFee(ef){}
 
 
-const quint16 &dorm::GetDormNumber()
+const quint16 &dorm::GetDormNumber() const
 {
     return DormNumber;
 }
 
-const quint16 &dorm::GetMaxNumber()
+const quint16 &dorm::GetMaxNumber() const
 {
     return MaxNumber;
 }
 
-const quint16 &dorm::GetNowNumber()
+const quint16 &dorm::GetNowNumber() const
 {
     return NowNumber;
 }
 
-const double &dorm::GetWaterFee()
+const double &dorm::GetWaterFee() const
 {
     return WaterFee;
 }
 
-const double &dorm::GetElecFee()
+const double &dorm::GetElecFee() const
 {
     return ElecFee;
 }
@@ -54,16 +54,21 @@ void dorm::add(student &stu)
     NowNumber++;
 }
 
-void dorm::goAway(QLinkedList<student>::iterator stu)
+void dorm::goAway(QList<student>::iterator stu)
 {
     StuDorm.erase(stu);
     NowNumber--;
 }
 
-void dorm::moveTo(QLinkedList<student>::iterator stu, dorm &newdorm)
+void dorm::moveTo(QList<student>::iterator stu, dorm &newdorm)
 {
     newdorm.StuDorm.append(*stu);
     StuDorm.erase(stu);
+}
+
+bool operator <(dorm &a, dorm &b)
+{
+    return (a.GetDormNumber() < b.GetDormNumber());
 }
 
 QDataStream &operator <<(QDataStream &out, const dorm &dor)

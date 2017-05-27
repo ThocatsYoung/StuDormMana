@@ -27,16 +27,16 @@ people::people()
 people::people(const QString &na, const bool sex, const QString &contact)
     :Name(na), Sexuality(sex), Contact(contact)
 {}
-const QString& people::GetContact()
+const QString& people::GetContact() const
 {
     return Contact;
 }
 
-const QString& people::GetName()
+const QString& people::GetName() const
 {
     return Name;
 }
-const bool& people::GetSexuality()
+const bool& people::GetSexuality() const
 {
     return Sexuality;
 }
@@ -58,17 +58,17 @@ void outsider::gone(const QDateTime gotime)
     HasGone = true;
 }
 
-const bool outsider::GetHasGone()
+const bool outsider::GetHasGone() const
 {
     return HasGone;
 }
 
-const QDateTime& outsider::GetComeTime()
+const QDateTime& outsider::GetComeTime() const
 {
     return ComeTime;
 }
 
-const QDateTime& outsider::GetGoTime()
+const QDateTime& outsider::GetGoTime() const
 {
     return GoTime;
 }
@@ -113,17 +113,17 @@ resident::resident(const QString na, const bool sex, const QString &contact,
     people(na, sex, contact), DormNumber(dN),
     ComeInDate(comein), IdNumber(id){}
 
-const QDate &resident::GetComeInDate()
+const QDate &resident::GetComeInDate() const
 {
     return ComeInDate;
 }
 
-const QString &resident::GetIdNumber()
+const QString &resident::GetIdNumber() const
 {
     return IdNumber;
 }
 
-const quint16 &resident::GetDormNumber()
+const quint16 &resident::GetDormNumber() const
 {
     return DormNumber;
 }
@@ -159,32 +159,32 @@ student::student(const QString &na, const bool sex, const QString &contact,
     StudentId(stuid), XueYuan(xueyuan),BanJi(bj),
     LastGoTime(comein), LastBackTime(comein), InSchool(true){}
 
-const QString &student::GetStudentId()
+const QString &student::GetStudentId() const
 {
     return StudentId;
 }
 
-const quint16 &student::GetXueYuan()
+const quint16 &student::GetXueYuan() const
 {
     return XueYuan;
 }
 
-const quint16 &student::GetBanJi()
+const quint16 &student::GetBanJi() const
 {
     return BanJi;
 }
 
-const bool &student::GetInSchool()
+const bool &student::GetInSchool() const
 {
     return InSchool;
 }
 
-const QDate &student::GetLastGoTime()
+const QDate &student::GetLastGoTime() const
 {
     return LastGoTime;
 }
 
-const QDate &student::GetLastBackTime()
+const QDate &student::GetLastBackTime() const
 {
     return LastBackTime;
 }
@@ -229,6 +229,11 @@ void student::backSchool(const QDate& backTime)
 {
     LastBackTime = backTime;
     InSchool = true;
+}
+
+bool operator <(student &a, student &b)
+{
+    return (a.GetStudentId() < b.GetStudentId());
 }
 
 QDataStream & operator <<(QDataStream &out, const student &obj)

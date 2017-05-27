@@ -27,15 +27,22 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     people.cpp \
     room.cpp \
-    student_information_edit_dialog.cpp
+    student_information_edit_dialog.cpp \
+    dormlistmodel.cpp \
+    studentlistmodel.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
     room.h \
-    student_information_edit_dialog.h
+    student_information_edit_dialog.h \
+    dormlistmodel.h \
+    studentlistmodel.h
 
 FORMS    += mainwindow.ui \
     student_information_edit_dialog.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro
+
+RESOURCES += \
+    file_for_test.qrc

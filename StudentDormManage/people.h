@@ -30,9 +30,9 @@ public:
     void SetContact(const QString &NewContact); //设置联系方式
 
     /*属性值获取函数*/
-    const QString& GetName(); //获取名字
-    const bool& GetSexuality();  //获取性别
-    const QString& GetContact();  //获取联系方式
+    const QString& GetName() const; //获取名字
+    const bool& GetSexuality() const;  //获取性别
+    const QString& GetContact() const;  //获取联系方式
 
 };
 
@@ -51,9 +51,9 @@ public:
     void gone(const QDateTime gotime);   //离开时调用
 
     /*属性值获取函数*/
-    const bool GetHasGone();
-    const QDateTime& GetComeTime();
-    const QDateTime& GetGoTime();
+    const bool GetHasGone() const;
+    const QDateTime& GetComeTime() const;
+    const QDateTime& GetGoTime() const;
 
     /*属性设置函数*/
     void SetHasGone(const bool hasgone);
@@ -79,9 +79,9 @@ public:
              const quint16 dN, const QDate comein, const QString id);
 
     /*属性值获取函数*/
-    const QDate& GetComeInDate();
-    const QString& GetIdNumber();
-    const quint16& GetDormNumber();
+    const QDate& GetComeInDate() const;
+    const QString& GetIdNumber() const;
+    const quint16& GetDormNumber() const;
 
     /*属性设置函数*/
     void SetDormNumber(const quint16 dorm);
@@ -108,12 +108,12 @@ public:
             const QString &stuid,const quint16 &xueyuan, const quint16 &bj);
 
     /*属性值获取函数*/
-    const QString& GetStudentId();
-    const quint16& GetXueYuan();
-    const quint16& GetBanJi();
-    const bool& GetInSchool();
-    const QDate& GetLastGoTime();
-    const QDate& GetLastBackTime();
+    const QString& GetStudentId() const;
+    const quint16& GetXueYuan() const;
+    const quint16& GetBanJi() const;
+    const bool& GetInSchool() const;
+    const QDate& GetLastGoTime() const;
+    const QDate& GetLastBackTime() const;
 
     /*属性值设置函数*/
     void SetStudentId(const QString &stuid);
@@ -130,6 +130,9 @@ public:
     //输入输出运算符重载;
     friend QDataStream &operator <<(QDataStream &out, const student &obj);
     friend QDataStream &operator >>(QDataStream &in, student &obj);
+
+    //比较运算符重载
+    friend bool operator <(student &a, student &b);
 };
 
 //教职工<-住宿人员<-人 （暂不使用）

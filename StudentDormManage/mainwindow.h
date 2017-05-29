@@ -27,6 +27,7 @@ public:
 
     void set_m_map_find_by_student_id(QMap<QString, student*> *map);
     void set_m_list_of_dorm(QList<dorm> *dorms);
+    void add_widget_to_tabwidget(QWidget* w);
 
 signals:
     void send_message_for_dorm_find(QString str);

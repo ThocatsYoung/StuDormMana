@@ -87,9 +87,7 @@ QVariant StudentListModel::data(const QModelIndex &index, int role) const
 
 void StudentListModel::set_student_list(QList<student> *sl)
 {
-    beginResetModel();
     student_list = sl;
-    endResetModel();
     emit layoutChanged();
 }
 
@@ -99,5 +97,4 @@ void StudentListModel::set_which_dorm(QModelIndex in)
     if(ok >= (dorm_list->size()))
         return;  
     this->set_student_list(&((*dorm_list)[ok].StuDorm));
-
 }

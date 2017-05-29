@@ -8,8 +8,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //connect
-    connect(this, send_message_for_dorm_find,
-            this, find_dorm_in_listview_dorm);
+    connect(this, send_message_for_dorm_find, this, find_dorm_in_listview_dorm);
+
+//设置界面属性
+    //主界面设置
+
+
+
+    //住宿学生视图设置
+    ui->tableView_students->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView_students->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView_students->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableView_students->verticalHeader()->hide();
 
     //设置查询编辑框只可输入数字
     QRegExp regx1("[1-9][0-9]{0,2}");   //第一位不可为0，限制3位数
@@ -54,6 +64,11 @@ void MainWindow::set_m_list_of_dorm(QList<dorm> *dorms)
     m_list_of_dorm = dorms;
 }
 
+void MainWindow::add_widget_to_tabwidget(QWidget *w)
+{
+    ui->TabWidget_manage->addTab(w,tr("宿舍违纪登记"));
+}
+
 
 void MainWindow::on_SwitchPushButton_clicked()
 {
@@ -88,6 +103,7 @@ void MainWindow::on_pushButton_find_by_stuid_clicked()
         QMessageBox::warning(this, tr("警告"), tr("查询学生学号不存在！"));
     else
     {
+        //展示学生信息
         student *stu = (*m_map_find_by_student_id)[student_id];
 
         QString student_info("姓名："+stu->GetName()+'\n'+
@@ -97,6 +113,7 @@ void MainWindow::on_pushButton_find_by_stuid_clicked()
                              "联系方式："+stu->GetContact()+'\n');
         QMessageBox::information(this, tr("学生信息"),student_info);
     }
+    ui->lineEdit_stuid->clear();    //清空文本
 }
 
 void MainWindow::find_dorm_in_listview_dorm(QString dorm_number)

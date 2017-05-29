@@ -29,17 +29,27 @@ SOURCES += main.cpp\
     room.cpp \
     student_information_edit_dialog.cpp \
     dormlistmodel.cpp \
-    studentlistmodel.cpp
+    studentlistmodel.cpp \
+    formforoutsidercome.cpp \
+    formforrulebreakrecord.cpp \
+    dialog_rulebreak_add.cpp \
+    record_rulebreak.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
     room.h \
     student_information_edit_dialog.h \
     dormlistmodel.h \
-    studentlistmodel.h
+    studentlistmodel.h \
+    formforoutsidercome.h \
+    formforrulebreakrecord.h \
+    dialog_rulebreak_add.h \
+    record_rulebreak.h
 
 FORMS    += mainwindow.ui \
-    student_information_edit_dialog.ui
+    student_information_edit_dialog.ui \
+    formforrulebreakrecord.ui \
+    dialog_rulebreak_add.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro

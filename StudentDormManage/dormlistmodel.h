@@ -4,6 +4,7 @@
 #include <QAbstractListModel>
 #include <QList>
 #include "room.h"
+#include "read_from_file.h"
 
 
 class DormListModel : public QAbstractListModel

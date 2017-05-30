@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include "formforrulebreakrecord.h"
+#include "read_from_file.h"
 
 
 namespace Ui {

@@ -30,10 +30,11 @@ SOURCES += main.cpp\
     student_information_edit_dialog.cpp \
     dormlistmodel.cpp \
     studentlistmodel.cpp \
-    formforoutsidercome.cpp \
     formforrulebreakrecord.cpp \
     dialog_rulebreak_add.cpp \
-    record_rulebreak.cpp
+    record_rulebreak.cpp \
+    dialog_login.cpp \
+    mainwindow_data_manager.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
@@ -41,15 +42,19 @@ HEADERS  += mainwindow.h \
     student_information_edit_dialog.h \
     dormlistmodel.h \
     studentlistmodel.h \
-    formforoutsidercome.h \
     formforrulebreakrecord.h \
     dialog_rulebreak_add.h \
-    record_rulebreak.h
+    record_rulebreak.h \
+    dialog_login.h \
+    read_from_file.h \
+    mainwindow_data_manager.h
 
 FORMS    += mainwindow.ui \
     student_information_edit_dialog.ui \
     formforrulebreakrecord.ui \
-    dialog_rulebreak_add.ui
+    dialog_rulebreak_add.ui \
+    dialog_login.ui \
+    mainwindow_data_manager.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro

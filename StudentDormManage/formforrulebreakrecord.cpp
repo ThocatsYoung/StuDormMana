@@ -179,7 +179,7 @@ void FormForRuleBreakRecord::on_pushButton_finish_outsider_record_clicked()
         return;
 }
 
-void FormForRuleBreakRecord::on_pushButton_clicked()
+void FormForRuleBreakRecord::on_pushButton_clicked()    //将当前记录移入历史记录
 {
     if(ui->tableView->model()->rowCount() == 0)
     {
@@ -193,18 +193,19 @@ void FormForRuleBreakRecord::on_pushButton_clicked()
     {
         //当前记录写入历史记录
         QMutableListIterator<record_rulebreak> i(*data_records);
-        while(i.hasNext())
+        i.toBack();
+        while(i.hasPrevious())
         {
-            data_pastrecords->prepend(i.next());
+            data_pastrecords->prepend(i.previous());
         }
-        data_records->clear();
+        data_records->clear();  //清空当前记录链表
         emit ui->tableView->model()->layoutChanged();
     }
     else
         return;
 }
 
-void FormForRuleBreakRecord::on_pushButton_show_past_clicked()
+void FormForRuleBreakRecord::on_pushButton_show_past_clicked()  //展示历史记录
 {
     QListWidget *listWidget_past_records = new QListWidget();
     QListIterator<record_rulebreak> i(*data_pastrecords);
@@ -222,6 +223,7 @@ void FormForRuleBreakRecord::on_pushButton_show_past_clicked()
     layout->addWidget(listWidget_past_records);
 
     QDialog *dialog = new QDialog(this);
+    dialog->setWindowTitle("宿舍违纪历史记录");
     dialog->setLayout(layout);
     dialog->show();
 }

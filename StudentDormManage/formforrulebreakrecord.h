@@ -4,8 +4,6 @@
 #include <QWidget>
 #include <QDateTime>
 #include <QList>
-#include <QFile>
-#include <QDataStream>
 #include <QAbstractTableModel>
 
 #include <QListWidget>
@@ -14,8 +12,10 @@
 #include <QComboBox>
 #include <QDateEdit>
 
+#include "read_from_file.h"
 #include "record_rulebreak.h"
 #include "dialog_rulebreak_add.h"
+
 
 
 
@@ -64,21 +64,21 @@ public:
     ~FormForRuleBreakRecord();
 
 private slots:
-    void on_pushButton_add_outsider_record_clicked();
+    void on_pushButton_add_outsider_record_clicked();   //添加记录
 
-    void on_pushButton_finish_outsider_record_clicked();
+    void on_pushButton_finish_outsider_record_clicked();    //删除记录
 
-    void on_pushButton_clicked();
+    void on_pushButton_clicked();   //将当前记录移入历史记录
 
-    void on_pushButton_show_past_clicked();
+    void on_pushButton_show_past_clicked(); //展示历史记录
 
 private:
     Ui::FormForRuleBreakRecord *ui;
     QString file_path;
     QString past_file_path;
-    RuleBreakRecordModel *model_records;
-    QList<record_rulebreak> *data_records;
-    QList<record_rulebreak> *data_pastrecords;
+    RuleBreakRecordModel *model_records;    //model
+    QList<record_rulebreak> *data_records;  //当前记录
+    QList<record_rulebreak> *data_pastrecords;  //历史记录
 };
 
 #endif // FORMFORRULEBREAKRECORD_H

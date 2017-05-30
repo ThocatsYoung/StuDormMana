@@ -2,8 +2,11 @@
 #define STUDENTLISTMODEL_H
 
 #include <QAbstractTableModel>
+
 #include "people.h"
 #include "room.h"
+#include "read_from_file.h"
+
 #include <QStringListModel>
 #include "dormlistmodel.h"
 
@@ -26,7 +29,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    void set_student_list(QList<student> *sl);  //老是出问题啊啊啊！！！
+    void set_student_list(QList<student> *sl);
     //友元类
     friend class DormListModel;
 

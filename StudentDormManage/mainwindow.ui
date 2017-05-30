@@ -296,13 +296,13 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="SwitchPushButton">
+   <widget class="QCommandLinkButton" name="SwitchPushButton">
     <property name="geometry">
      <rect>
-      <x>940</x>
+      <x>970</x>
       <y>0</y>
-      <width>131</width>
-      <height>28</height>
+      <width>81</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">

@@ -34,7 +34,11 @@ SOURCES += main.cpp\
     dialog_rulebreak_add.cpp \
     record_rulebreak.cpp \
     dialog_login.cpp \
-    mainwindow_data_manager.cpp
+    mainwindow_data_manager.cpp \
+    read_from_file.cpp \
+    dialog_dorm_edit.cpp \
+    dialog_user_info.cpp \
+    dialog_user_show.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
@@ -47,17 +51,22 @@ HEADERS  += mainwindow.h \
     record_rulebreak.h \
     dialog_login.h \
     read_from_file.h \
-    mainwindow_data_manager.h
+    mainwindow_data_manager.h \
+    dialog_dorm_edit.h \
+    dialog_user_info.h \
+    dialog_user_show.h
 
 FORMS    += mainwindow.ui \
     student_information_edit_dialog.ui \
     formforrulebreakrecord.ui \
     dialog_rulebreak_add.ui \
     dialog_login.ui \
-    mainwindow_data_manager.ui
+    mainwindow_data_manager.ui \
+    dialog_dorm_edit.ui \
+    dialog_user_info.ui \
+    dialog_user_show.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro
 
-RESOURCES += \
-    file_for_test.qrc
+RESOURCES +=

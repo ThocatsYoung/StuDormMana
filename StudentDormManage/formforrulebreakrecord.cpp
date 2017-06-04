@@ -87,17 +87,14 @@ void RuleBreakRecordModel::setList_records(QList<record_rulebreak> *list_records
     m_list_records = list_records;
 }
 
-void RuleBreakRecordModel::add_new_record(record_rulebreak new_record)
-{
-    m_list_records->prepend(new_record);
-    emit layoutChanged();
-}
-
 
 
 //ui
-FormForRuleBreakRecord::FormForRuleBreakRecord(QString path, QString past_path,  QWidget *parent) :
-    file_path(path), past_file_path(past_path), data_records(NULL), model_records(NULL), QWidget(parent),
+FormForRuleBreakRecord::FormForRuleBreakRecord(QString path, QString past_path,
+                                               QSet<quint16> *p, QWidget *parent) :
+    file_path(path), past_file_path(past_path),
+    point_to_set_of_dorm_number(p),
+    data_records(NULL), model_records(NULL), QWidget(parent),
     ui(new Ui::FormForRuleBreakRecord)
 {
     ui->setupUi(this);
@@ -132,22 +129,36 @@ FormForRuleBreakRecord::FormForRuleBreakRecord(QString path, QString past_path, 
 FormForRuleBreakRecord::~FormForRuleBreakRecord()
 {
     //保存当前违纪记录数据
-    QFile file(file_path);
-    file.open(QIODevice::WriteOnly);
-    QDataStream f(&file);
-    f << (*data_records);
-    file.close();
+    save_record_to_file();
 
-    QFile past_file(past_file_path);
-    past_file.open(QIODevice::WriteOnly);
-    QDataStream pf(&past_file);
-    pf << (*data_pastrecords);
-    past_file.close();
-
-
+    point_to_set_of_dorm_number = NULL;
     delete ui;
-    delete model_records;
-    delete data_records;
+    if (model_records != NULL)
+    {
+        delete model_records;
+    }
+    if (data_records != NULL)
+    {
+        delete data_records;
+    }
+}
+
+void FormForRuleBreakRecord::save_record_to_file()
+{
+    write_container_to_file(data_records, file_path);
+    write_container_to_file(data_pastrecords, past_file_path);
+    return;
+}
+
+void FormForRuleBreakRecord::add_new_record(record_rulebreak new_record)
+{
+    if (!point_to_set_of_dorm_number->contains(new_record.get_dorm_number()))
+    {
+        warning_message_box("添加记录中的宿舍号不存在！");
+        return;
+    }
+    data_records->prepend(new_record);
+    emit ui->tableView->model()->layoutChanged();
 }
 
 
@@ -156,7 +167,7 @@ void FormForRuleBreakRecord::on_pushButton_add_outsider_record_clicked()
 {
     Dialog_rulebreak_add *dialog = new Dialog_rulebreak_add(this);
     connect(dialog, Dialog_rulebreak_add::send_MSG_of_rulebreak,
-            this->model_records, RuleBreakRecordModel::add_new_record);
+            this, FormForRuleBreakRecord::add_new_record);
     dialog->exec();
 }
 
@@ -168,6 +179,12 @@ void FormForRuleBreakRecord::on_pushButton_finish_outsider_record_clicked()
         return;
     }
     int row_tobe_removed = ui->tableView->currentIndex().row();
+    if (row_tobe_removed >= data_records->count()
+            || row_tobe_removed < 0)
+    {
+        QMessageBox::warning(this,tr("警告"),tr("未选中违纪记录"));
+        return;
+    }
     int reply = QMessageBox::question(this,tr("询问"),tr("确定删除该记录？"),
                           QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes)
@@ -212,10 +229,7 @@ void FormForRuleBreakRecord::on_pushButton_show_past_clicked()  //展示历史�
     while(i.hasNext())
     {
         const record_rulebreak *p = &(i.next());
-        QString s = QString("%1").arg(p->get_date().toString("yyyy-MM-dd"))
-                +"    "+QString("%1").arg(p->get_dorm_number())
-                +"    "+QString("%1").arg(record_rulebreak::break_rule_things.at(p->get_breaked_rule()));
-        listWidget_past_records->addItem(new QListWidgetItem(s));
+        listWidget_past_records->addItem(new QListWidgetItem(p->toString()));
     }
 
 

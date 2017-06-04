@@ -21,6 +21,8 @@ public:
     const quint16 get_breaked_rule() const;
     const QDate get_date() const;
 
+    QString toString() const;
+
     //重载运算符
     friend QDataStream& operator <<(QDataStream& out, const record_rulebreak &record);
     friend QDataStream& operator >>(QDataStream& in, record_rulebreak &record);

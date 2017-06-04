@@ -10,6 +10,12 @@
     <height>306</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>561</width>
+    <height>16777215</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
@@ -97,6 +103,9 @@
      <widget class="QRadioButton" name="radioButton_data_manager">
       <property name="text">
        <string>住宿数据管理员</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
       </property>
      </widget>
     </item>

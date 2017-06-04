@@ -6,25 +6,324 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>999</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="Line" name="line">
     <property name="geometry">
      <rect>
       <x>10</x>
+      <y>110</y>
+      <width>971</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>242</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_dorm">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <property name="rightMargin">
+      <number>10</number>
+     </property>
+     <property name="bottomMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="QGroupBox" name="groupBox_dorm_oper">
+       <property name="title">
+        <string>宿舍信息操作</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushButton_add_dorm">
+          <property name="text">
+           <string>添加宿舍</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_edit_dorm">
+          <property name="text">
+           <string>修改宿舍信息</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_delete_dorm">
+          <property name="text">
+           <string>删除宿舍信息</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListView" name="listView_dorm">
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>70</y>
+      <width>411</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_find_student">
+     <item>
+      <widget class="QLineEdit" name="lineEdit_stuid"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_find_by_stuid">
+       <property name="text">
+        <string>按学号查找学生</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>70</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_find_dorm">
+     <item>
+      <widget class="QPushButton" name="pushButton_to_dorm">
+       <property name="text">
+        <string>跳转到宿舍</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_dorm_number"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>140</y>
+      <width>671</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <property name="rightMargin">
+      <number>10</number>
+     </property>
+     <property name="bottomMargin">
+      <number>10</number>
+     </property>
+     <property name="horizontalSpacing">
+      <number>10</number>
+     </property>
+     <item row="1" column="0">
+      <widget class="QTableView" name="tableView_student">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_dorm_info">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_text_water_fee">
+         <property name="text">
+          <string>欠缴水费：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_text_elec_fee">
+         <property name="text">
+          <string>欠缴电费：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_text_nowNumber">
+         <property name="text">
+          <string>当前住宿人数：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_text_maxNumber">
+         <property name="text">
+          <string>最大允许居住人数：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_info_max">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_info_waterfee">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="label_info_now">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_info_elecfee">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1" rowspan="2">
+      <widget class="QGroupBox" name="groupBox_student_oper">
+       <property name="title">
+        <string>住宿学生信息操作</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>20</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="pushButton_show_student">
+          <property name="text">
+           <string>当前学生详细信息</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_add_student">
+          <property name="text">
+           <string>添加学生</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_edit_student">
+          <property name="text">
+           <string>修改学生信息</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_delete_student">
+          <property name="text">
+           <string>移除学生</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QCommandLinkButton" name="commandLinkButton">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
       <y>10</y>
-      <width>151</width>
+      <width>187</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>载入宿舍楼数据</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_text_building">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>20</y>
+      <width>91</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>住宿数据管理员界面</string>
+     <string>当前宿舍楼：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_building">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>20</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -33,12 +332,30 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>999</width>
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>帐号设置</string>
+    </property>
+    <addaction name="action_edit_mima"/>
+    <addaction name="action_add_remove_users"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_edit_mima">
+   <property name="text">
+    <string>修改当前帐号密码</string>
+   </property>
+  </action>
+  <action name="action_add_remove_users">
+   <property name="text">
+    <string>宿舍管理员帐号管理</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

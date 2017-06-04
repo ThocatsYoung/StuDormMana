@@ -1,25 +1,47 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QString user,
+                       QWidget *parent) :
+    user_name(user),
+    model_dorm(NULL), model_student(NULL),
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    //connect
+    init_user_data();
+//初始化数据结构
+    init_list_of_dorm();
+    init_set_of_dorm_number();
+    init_map_of_student_id();
+
+    model_dorm = new DormListModel(&m_list_of_dorm);
+    model_student = new StudentListModel(0);
+
+    ui->listView_dorm->setModel(model_dorm);
+    ui->tableView_students->setModel(model_student);
+
+    //connect 在视图中查找指定宿舍
     connect(this, send_message_for_dorm_find, this, find_dorm_in_listview_dorm);
 
-//设置界面属性
-    //主界面设置
+    //选中宿舍改变时改变学生视图对应信息
+    connect(ui->listView_dorm, &QListView::clicked,
+            this, &MainWindow::change_dorm_information);
+    connect(this, MainWindow::send_point_of_student_list_to_model,
+            model_student, StudentListModel::slot_to_set_student_list);
 
+//设置界面
 
+    ui->calendarWidget->setDateEditEnabled(false);
+    ui->calendarWidget->setSelectionMode(QCalendarWidget::NoSelection);    //日历不可编辑，只可查看
 
-    //住宿学生视图设置
-    ui->tableView_students->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableView_students->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableView_students->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableView_students->verticalHeader()->hide();
+    //主界面添加窗口
+    FormForRuleBreakRecord *Form_rulebreak = new FormForRuleBreakRecord
+            (add_user_and_path(user_name, path_of_rulebreak_record),
+             add_user_and_path(user_name, path_of_rulebreak_record_past),
+             &set_of_dorm_number,this);
+    this->add_widget_to_tabwidget(Form_rulebreak, "宿舍违纪记录");
 
     //设置查询编辑框只可输入数字
     QRegExp regx1("[1-9][0-9]{0,2}");   //第一位不可为0，限制3位数
@@ -34,39 +56,24 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    m_list_of_dorm = NULL;
-    m_map_find_by_student_id = NULL;
+    if (model_dorm != NULL){
+        delete model_dorm;
+        model_dorm = NULL;
+    }
+    if (model_student != NULL){
+        delete model_student;
+        model_student = NULL;
+    }
 }
 
-void MainWindow::set_listview_dorm_model(DormListModel *model)
+void MainWindow::add_widget_to_tabwidget(QWidget *w ,QString title)
 {
-    ui->listView_dorm->setModel(model);
+    ui->TabWidget_manage->addTab(w,title);
 }
 
-void MainWindow::set_tableview_students_model(StudentListModel *students)
+void MainWindow::init_user_data()
 {
-    ui->tableView_students->setModel(students);
-}
-
-void MainWindow::lianjie_students_model_and_listview_dorm(StudentListModel *m)
-{
-    connect(ui->listView_dorm, &QListView::clicked,
-            m,StudentListModel::set_which_dorm);
-}
-
-void MainWindow::set_m_map_find_by_student_id(QMap<QString, student *> *map)
-{
-    m_map_find_by_student_id = map;
-}
-
-void MainWindow::set_m_list_of_dorm(QList<dorm> *dorms)
-{
-    m_list_of_dorm = dorms;
-}
-
-void MainWindow::add_widget_to_tabwidget(QWidget *w)
-{
-    ui->TabWidget_manage->addTab(w,tr("宿舍违纪登记"));
+    read_file_to_container(path_of_dorm_manager, map_dorm_manager);
 }
 
 
@@ -88,32 +95,50 @@ void MainWindow::on_SwitchPushButton_clicked()
 
 void MainWindow::on_pushButton_to_dorm_clicked()
 {
-    QString dorm_number = ui->lineEdit_dorm_number->text();
-    if(dorm_number.isEmpty())
-        QMessageBox::warning(this, tr("警告"), tr("查询宿舍号不可为空！"));
-    emit send_message_for_dorm_find(dorm_number);
+    QString dorm_number_text = ui->lineEdit_dorm_number->text();
+    if(dorm_number_text.isEmpty())
+    {
+        warning_message_box("查询宿舍号不可为空！");
+        return;
+    }else{
+        if (!set_of_dorm_number.contains(dorm_number_text.toInt()))
+        {
+            warning_message_box("查询宿舍号不存在！");
+            return;
+        }
+    }
+
+    emit send_message_for_dorm_find(dorm_number_text);
 }
 
 void MainWindow::on_pushButton_find_by_stuid_clicked()
 {
     QString student_id = ui->lineEdit_stuid->text();
     if(student_id.isEmpty())
-        QMessageBox::warning(this, tr("警告"), tr("查询学生学号不可为空！"));
-    if(!(m_map_find_by_student_id->contains(student_id)))
-        QMessageBox::warning(this, tr("警告"), tr("查询学生学号不存在！"));
+        warning_message_box("查询学生学号不可为空！");
+    if(!(m_map_find_by_student_id.contains(student_id)))
+        warning_message_box("查询学生学号不存在！");
     else
     {
         //展示学生信息
-        student *stu = (*m_map_find_by_student_id)[student_id];
-
-        QString student_info("姓名："+stu->GetName()+'\n'+
-                             "学号："+stu->GetStudentId()+'\n'+
-                             "宿舍号："+QString("%1").arg(stu->GetDormNumber())+'\n'+
-                             "学院："+QString("%1").arg(stu->GetXueYuan())+'\n'+
-                             "联系方式："+stu->GetContact()+'\n');
-        QMessageBox::information(this, tr("学生信息"),student_info);
+        student *stu = (m_map_find_by_student_id)[student_id];
+        QMessageBox::information(this, tr("学生信息"), stu->toString());
     }
     ui->lineEdit_stuid->clear();    //清空文本
+}
+
+void MainWindow::change_dorm_information()
+{
+    int index = ui->listView_dorm->currentIndex().row();
+    int count = m_list_of_dorm.count();
+
+    if (index < 0 || index > (count-1))
+        return;
+
+    QList<student> *p = &((m_list_of_dorm.operator [](index)).StuDorm);
+    emit this->send_point_of_student_list_to_model(p);
+
+    return;
 }
 
 void MainWindow::find_dorm_in_listview_dorm(QString dorm_number)
@@ -125,7 +150,7 @@ void MainWindow::find_dorm_in_listview_dorm(QString dorm_number)
     //报错
     if(indexList.isEmpty())
     {
-        QMessageBox::warning(this, tr("警告"), tr("你所查找的宿舍不存在！"));
+       warning_message_box("你所查找的宿舍不存在！");
         return;
     }
 
@@ -134,3 +159,57 @@ void MainWindow::find_dorm_in_listview_dorm(QString dorm_number)
     ui->listView_dorm->setCurrentIndex(selected_index);
     emit ui->listView_dorm->clicked(selected_index);
 }
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    switch( QMessageBox::information(this,tr("提示"),
+                                     tr("确定退出学生宿舍管理系统？\n若退出，你当前的所有操作将会保存。"),
+                                     tr("确定"), tr("取消"),0,1))
+    {
+    case 0:
+        event->accept();
+        break;
+    case 1:
+    default:
+        event->ignore();
+        break;
+    }
+}
+
+
+
+void MainWindow::init_list_of_dorm()
+{
+    m_list_of_dorm.clear();
+    if (user_name.isEmpty())
+        return;
+    read_file_to_container(add_user_and_path(user_name, path_of_data_dorm),
+                           m_list_of_dorm);
+}
+
+void MainWindow::init_set_of_dorm_number()
+{
+    set_of_dorm_number.clear();
+    for(QListIterator<dorm> i(m_list_of_dorm);
+            i.hasNext();){
+            set_of_dorm_number.insert(i.next().GetDormNumber());
+    }
+}
+
+void MainWindow::init_map_of_student_id()
+{
+    m_map_find_by_student_id.clear();
+    for(QMutableListIterator<dorm> i(m_list_of_dorm); i.hasNext();)
+    {
+        QMutableListIterator<student> j(i.next().StuDorm);
+        while(j.hasNext())
+        {
+            student *stu = &j.next();
+            if(m_map_find_by_student_id.contains(stu->GetStudentId()))
+                continue;
+            m_map_find_by_student_id.insert(stu->GetStudentId(),stu);
+        }
+    }
+}
+
+

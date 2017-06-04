@@ -16,7 +16,7 @@ class StudentListModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    explicit StudentListModel(QList<dorm> *d, QList<student> *s,
+    explicit StudentListModel(QList<student> *s = 0,
                               QObject *parent = 0);
     ~StudentListModel();
 
@@ -29,16 +29,21 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    void set_student_list(QList<student> *sl);
+
     //友元类
     friend class DormListModel;
 
+    student* get_student_info_at(int index);    //获取选定学生信息
+
+    void set_student_list(QList<student> *sl);  //设置底层数据
+
 public slots:
-    void set_which_dorm(QModelIndex in);    //以下标设置学生链表指针
+
+    void slot_to_set_student_list(QList<student> *sl);
 
 private:
     QStringList headers;
-    QList<dorm> *dorm_list; //用于与宿舍号选取对应数据
+
     QList<student> *student_list;   //指向住宿学生数据
 
 };

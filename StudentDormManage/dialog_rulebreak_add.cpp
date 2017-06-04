@@ -7,12 +7,15 @@ Dialog_rulebreak_add::Dialog_rulebreak_add(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setWindowTitle("宿舍违纪记录添加");
+
 
     QRegExp regx1("[1-9][0-9]{0,2}");   //第一位不可为0，限制3位数
     QValidator *of_edit_dorm = new QRegExpValidator(regx1, ui->lineEdit);
     ui->lineEdit->setValidator(of_edit_dorm);
 
     ui->dateEdit->setDate(QDate::currentDate());
+
 
     //设置补全框
     foreach(QString s, record_rulebreak::break_rule_things)

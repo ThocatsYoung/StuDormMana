@@ -26,6 +26,8 @@ int DormListModel::rowCount(const QModelIndex &parent) const
 {
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
+    if (m_list_dorm == NULL)
+        return 0;
     if (parent.isValid())
         return 0;
     return m_list_dorm->count();
@@ -35,6 +37,8 @@ int DormListModel::rowCount(const QModelIndex &parent) const
 
 QVariant DormListModel::data(const QModelIndex &index, int role) const
 {
+    if (m_list_dorm == NULL)
+        return QVariant();
     if (!index.isValid())
         return QVariant();
     if (index.row() >= m_list_dorm->size())
@@ -55,4 +59,11 @@ QVariant DormListModel::data(const QModelIndex &index, int role) const
 void DormListModel::set_list_dorm(QList<dorm> *list_dorm)
 {
     m_list_dorm = list_dorm;
+    emit layoutChanged();
+}
+
+void DormListModel::add_dorm(dorm value)
+{
+    m_list_dorm->prepend(value);
+    emit layoutChanged();
 }

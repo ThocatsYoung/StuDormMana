@@ -36,56 +36,20 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>10</y>
+       <y>20</y>
        <width>296</width>
-       <height>251</height>
+       <height>261</height>
       </rect>
      </property>
      <property name="dateEditEnabled">
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QListWidget" name="listWidget_todo_things">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>330</y>
-       <width>251</width>
-       <height>241</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_add_todo">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>360</y>
-       <width>51</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>添加</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_delete_todo">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>490</y>
-       <width>51</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>删去</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_text_todolist">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>300</y>
+       <y>330</y>
        <width>101</width>
        <height>21</height>
       </rect>
@@ -98,13 +62,23 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>270</y>
+       <y>300</y>
        <width>331</width>
        <height>20</height>
       </rect>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit_todo">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>360</y>
+       <width>291</width>
+       <height>211</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -180,6 +154,18 @@
          <height>281</height>
         </rect>
        </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::ElideLeft</enum>
+       </property>
+       <property name="layoutMode">
+        <enum>QListView::Batched</enum>
+       </property>
       </widget>
       <widget class="QLabel" name="label_text_student_info">
        <property name="geometry">
@@ -226,6 +212,36 @@
          <height>271</height>
         </rect>
        </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>false</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::ElideLeft</enum>
+       </property>
+       <property name="gridStyle">
+        <enum>Qt::SolidLine</enum>
+       </property>
+       <attribute name="horizontalHeaderCascadingSectionResizes">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
       </widget>
       <widget class="QLabel" name="label_text_dorm">
        <property name="geometry">
@@ -255,28 +271,8 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>-1</number>
        </property>
-       <widget class="QWidget" name="Tab_OutsiderCome">
-        <attribute name="title">
-         <string>外访登记</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="Tab_ThingsMange">
-        <attribute name="title">
-         <string>公用物品管理</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="Tab_Repair">
-        <attribute name="title">
-         <string>维修申请登记</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="Tab_GoAndLeave">
-        <attribute name="title">
-         <string>留校/离校登记</string>
-        </attribute>
-       </widget>
       </widget>
       <widget class="QLabel" name="label_text_function_manage">
        <property name="geometry">

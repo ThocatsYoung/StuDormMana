@@ -31,6 +31,14 @@ const QDate record_rulebreak::get_date() const
     return date;
 }
 
+QString record_rulebreak::toString() const
+{
+    QString s = QString("%1").arg(this->get_date().toString("yyyy-MM-dd"))
+            +'\t'+QString("%1").arg(this->get_dorm_number())
+            +'\t'+QString("%1").arg(record_rulebreak::break_rule_things.at(this->get_breaked_rule()));
+    return s;
+}
+
 QDataStream &operator <<(QDataStream &out, const record_rulebreak &record)
 {
     out << record.dorm_number << record.breaked_rule << record.date;

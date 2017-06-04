@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_Dorm_Edit</class>
+ <widget class="QDialog" name="Dialog_Dorm_Edit">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>373</width>
+    <height>223</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>40</y>
+     <width>251</width>
+     <height>107</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_text_maxNumber">
+      <property name="text">
+       <string>最大允许居住人数：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_text_elec_fee">
+      <property name="text">
+       <string>欠缴电费：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_water_fee"/>
+    </item>
+    <item row="3" column="1" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_elec_fee"/>
+    </item>
+    <item row="1" column="1" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_max"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_text_water_fee">
+      <property name="text">
+       <string>欠缴水费：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>宿舍号：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="3">
+     <widget class="QLineEdit" name="lineEdit_dorm"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="pushButton_ok">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>170</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>添加</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_cancel">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>170</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

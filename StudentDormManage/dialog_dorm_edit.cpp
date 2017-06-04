@@ -91,12 +91,12 @@ void Dialog_Dorm_Edit::on_pushButton_ok_clicked()
     if (dorm_number_text.isEmpty() || max_number_text.isEmpty()
             || wfee_text.isEmpty() || efee_text.isEmpty())
     {
-        QMessageBox::warning(this,tr("警告"),tr("编辑框不可为空"));
+        warning_message_box("编辑框不可为空");
         return;
     }
     if (dorm_number_text.count() < 3)
     {
-        QMessageBox::warning(this,tr("警告"),tr("宿舍号须为3位数字"));
+        warning_message_box("宿舍号须为3位数字");
         return;
     }
 

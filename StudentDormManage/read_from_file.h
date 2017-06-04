@@ -17,8 +17,15 @@ const QString path_of_dorm_manager("dorm_manager.dat");   //宿舍管理员信�
 
 const QString path_of_data_dorm("information_of_dorms.dat");   //宿舍信息
 
-const QString path_of_rulebreak_record("rulebreak_record.dat");
-const QString path_of_rulebreak_record_past("rulebreak_record_past.dat");
+const QString path_of_rulebreak_record("rulebreak_record.dat"); //宿舍违纪记录
+const QString path_of_rulebreak_record_past("rulebreak_record_past.dat");   //宿舍违纪历史记录
+
+const QString path_of_wailairen_record("wailairen_record.dat");   //外访信息
+const QString path_of_wailairen_record_past("wailairen_record_past.dat");    //历史外访信息
+const QString path_of_outschool_record("outschool_record.dat");   //离校信息
+const QString path_of_outschool_record_past("outschool_record_past.dat");    //历史离校信息
+const QString path_of_wangui_record("wangui_record.dat");   //晚归信息
+const QString path_of_wangui_record_past("wangui_record_past.dat");    //历史晚归信息
 
 
 //在文件不存在时建立以path命名的空文件

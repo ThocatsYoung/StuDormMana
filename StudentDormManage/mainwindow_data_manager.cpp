@@ -360,7 +360,7 @@ void MainWindow_data_manager::on_pushButton_add_student_clicked()
     int index = ui->listView_dorm->currentIndex().row();
     if (index < 0 || index >= m_list_of_dorm.count())
     {
-        QMessageBox::warning(this, tr("警告"), tr("未选取宿舍"));
+        warning_message_box("未选取宿舍");
         return;
     }
     dorm *pDorm = &(m_list_of_dorm.operator [](index));

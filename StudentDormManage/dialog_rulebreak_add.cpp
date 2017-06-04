@@ -9,7 +9,6 @@ Dialog_rulebreak_add::Dialog_rulebreak_add(QWidget *parent) :
 
     this->setWindowTitle("宿舍违纪记录添加");
 
-
     QRegExp regx1("[1-9][0-9]{0,2}");   //第一位不可为0，限制3位数
     QValidator *of_edit_dorm = new QRegExpValidator(regx1, ui->lineEdit);
     ui->lineEdit->setValidator(of_edit_dorm);
@@ -33,7 +32,7 @@ void Dialog_rulebreak_add::on_buttonBox_accepted()
 {
     if(ui->lineEdit->text().isEmpty())
     {
-        QMessageBox::warning(this,tr("警告"),tr("宿舍号不可为空"));
+        warning_message_box("宿舍号不可为空");
         return;
     }
 

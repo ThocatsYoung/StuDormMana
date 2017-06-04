@@ -36,14 +36,32 @@ MainWindow::MainWindow(QString user,
     ui->calendarWidget->setDateEditEnabled(false);
     ui->calendarWidget->setSelectionMode(QCalendarWidget::NoSelection);    //日历不可编辑，只可查看
 
-    //主界面添加窗口
+//主界面添加窗口
+    //离校登记界面
+    Formforoutschool *Form_outschool = new Formforoutschool(add_user_and_path(user_name, path_of_outschool_record),
+                                                            add_user_and_path(user_name,path_of_outschool_record_past),
+                                                            &m_map_find_by_student_id, this);
+    this->add_widget_to_tabwidget(Form_outschool, "离校登记");
+
+    //外访登记界面
+    FormForOutsider *Form_outsider = new FormForOutsider(add_user_and_path(user_name, path_of_wailairen_record),
+                                                         add_user_and_path(user_name,path_of_wailairen_record_past));
+    this->add_widget_to_tabwidget(Form_outsider, "外访人员登记");
+
+    //晚归登记界面
+    Formforwangui *Form_wangui = new Formforwangui(add_user_and_path(user_name, path_of_wangui_record),
+                                                   add_user_and_path(user_name, path_of_wangui_record_past),
+                                                   &m_map_find_by_student_id);
+    this->add_widget_to_tabwidget(Form_wangui, "晚归登记");
+
+    //宿舍违纪登记界面
     FormForRuleBreakRecord *Form_rulebreak = new FormForRuleBreakRecord
             (add_user_and_path(user_name, path_of_rulebreak_record),
              add_user_and_path(user_name, path_of_rulebreak_record_past),
              &set_of_dorm_number,this);
     this->add_widget_to_tabwidget(Form_rulebreak, "宿舍违纪记录");
 
-    //设置查询编辑框只可输入数字
+//设置查询编辑框只可输入数字
     QRegExp regx1("[1-9][0-9]{0,2}");   //第一位不可为0，限制3位数
     QValidator *of_edit_dorm = new QRegExpValidator(regx1, ui->lineEdit_dorm_number );
     ui->lineEdit_dorm_number->setValidator(of_edit_dorm);

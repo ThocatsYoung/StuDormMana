@@ -84,8 +84,8 @@ private:
 
     QSet<quint16> *point_to_set_of_dorm_number;   //宿舍号集合
     RuleBreakRecordModel *model_records;    //model
-    QList<record_rulebreak> *data_records;  //宿舍违纪当前记录
-    QList<record_rulebreak> *data_pastrecords;  //宿舍违纪历史记录
+    QList<record_rulebreak> data_records;  //宿舍违纪当前记录
+    QList<record_rulebreak> data_pastrecords;  //宿舍违纪历史记录
 };
 
 #endif // FORMFORRULEBREAKRECORD_H

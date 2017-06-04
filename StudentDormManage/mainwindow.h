@@ -7,10 +7,14 @@
 #include <QMap>
 #include <QPair>
 #include <QSet>
+
 #include "dormlistmodel.h"
 #include "studentlistmodel.h"
-#include "formforrulebreakrecord.h"
 
+#include "formforrulebreakrecord.h"
+#include "formforoutschool.h"
+#include "formforoutsider.h"
+#include "formforwangui.h"
 
 namespace Ui {
 class MainWindow;

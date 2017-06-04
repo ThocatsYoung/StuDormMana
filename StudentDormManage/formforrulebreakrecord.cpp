@@ -94,35 +94,24 @@ FormForRuleBreakRecord::FormForRuleBreakRecord(QString path, QString past_path,
                                                QSet<quint16> *p, QWidget *parent) :
     file_path(path), past_file_path(past_path),
     point_to_set_of_dorm_number(p),
-    data_records(NULL), model_records(NULL), QWidget(parent),
+    model_records(NULL), QWidget(parent),
     ui(new Ui::FormForRuleBreakRecord)
 {
     ui->setupUi(this);
 
     //设置view选取模式
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableView->setSelectionMode ( QAbstractItemView::SingleSelection);
+    ui->tableView->setSelectionMode (QAbstractItemView::SingleSelection);
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     //初始化违纪记录数据(文件读写)
-    data_records = new QList<record_rulebreak>();
-    QFile file(file_path);
-    file.open(QIODevice::ReadOnly);
-    QDataStream f(&file);
-    f >> (*data_records);
-    file.close();
-
-    data_pastrecords = new QList<record_rulebreak>();
-    QFile past_file(past_file_path);
-    past_file.open(QIODevice::ReadOnly);
-    QDataStream pf(&past_file);
-    pf >> (*data_pastrecords);
-    past_file.close();
+    read_file_to_container(file_path, data_records);
+    read_file_to_container(past_file_path, data_pastrecords);
 
 
     //初始化违纪记录model
     model_records = new RuleBreakRecordModel();
-    model_records->setList_records(data_records);
+    model_records->setList_records(&data_records);
     ui->tableView->setModel(model_records);
 }
 
@@ -136,10 +125,6 @@ FormForRuleBreakRecord::~FormForRuleBreakRecord()
     if (model_records != NULL)
     {
         delete model_records;
-    }
-    if (data_records != NULL)
-    {
-        delete data_records;
     }
 }
 
@@ -157,7 +142,7 @@ void FormForRuleBreakRecord::add_new_record(record_rulebreak new_record)
         warning_message_box("添加记录中的宿舍号不存在！");
         return;
     }
-    data_records->prepend(new_record);
+    data_records.prepend(new_record);
     emit ui->tableView->model()->layoutChanged();
 }
 
@@ -175,21 +160,21 @@ void FormForRuleBreakRecord::on_pushButton_finish_outsider_record_clicked()
 {
     if(ui->tableView->model()->rowCount() == 0)
     {
-        QMessageBox::warning(this,tr("警告"),tr("没有可删除的违纪记录"));
+        warning_message_box("没有可删除的违纪记录");
         return;
     }
     int row_tobe_removed = ui->tableView->currentIndex().row();
-    if (row_tobe_removed >= data_records->count()
+    if (row_tobe_removed >= data_records.count()
             || row_tobe_removed < 0)
     {
-        QMessageBox::warning(this,tr("警告"),tr("未选中违纪记录"));
+        warning_message_box("未选中违纪记录");
         return;
     }
     int reply = QMessageBox::question(this,tr("询问"),tr("确定删除该记录？"),
                           QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes)
     {
-        data_records->removeAt(row_tobe_removed);
+        data_records.removeAt(row_tobe_removed);
         emit ui->tableView->model()->layoutChanged();
     }
     else
@@ -209,13 +194,13 @@ void FormForRuleBreakRecord::on_pushButton_clicked()    //将当前记录移入�
     if(reply == QMessageBox::Yes)
     {
         //当前记录写入历史记录
-        QMutableListIterator<record_rulebreak> i(*data_records);
+        QMutableListIterator<record_rulebreak> i(data_records);
         i.toBack();
         while(i.hasPrevious())
         {
-            data_pastrecords->prepend(i.previous());
+            data_pastrecords.prepend(i.previous());
         }
-        data_records->clear();  //清空当前记录链表
+        data_records.clear();  //清空当前记录链表
         emit ui->tableView->model()->layoutChanged();
     }
     else
@@ -224,8 +209,8 @@ void FormForRuleBreakRecord::on_pushButton_clicked()    //将当前记录移入�
 
 void FormForRuleBreakRecord::on_pushButton_show_past_clicked()  //展示历史记录
 {
-    QListWidget *listWidget_past_records = new QListWidget();
-    QListIterator<record_rulebreak> i(*data_pastrecords);
+    QListWidget *listWidget_past_records = new QListWidget(this);
+    QListIterator<record_rulebreak> i(data_pastrecords);
     while(i.hasNext())
     {
         const record_rulebreak *p = &(i.next());
@@ -233,7 +218,7 @@ void FormForRuleBreakRecord::on_pushButton_show_past_clicked()  //展示历史�
     }
 
 
-    QHBoxLayout *layout = new QHBoxLayout;
+    QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(listWidget_past_records);
 
     QDialog *dialog = new QDialog(this);

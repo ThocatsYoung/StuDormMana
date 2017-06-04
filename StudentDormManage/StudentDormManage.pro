@@ -38,7 +38,13 @@ SOURCES += main.cpp\
     read_from_file.cpp \
     dialog_dorm_edit.cpp \
     dialog_user_info.cpp \
-    dialog_user_show.cpp
+    dialog_user_show.cpp \
+    outschool.cpp \
+    wailairen.cpp \
+    dialog_wailairen_add.cpp \
+    formforoutsider.cpp \
+    formforoutschool.cpp \
+    formforwangui.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
@@ -54,7 +60,13 @@ HEADERS  += mainwindow.h \
     mainwindow_data_manager.h \
     dialog_dorm_edit.h \
     dialog_user_info.h \
-    dialog_user_show.h
+    dialog_user_show.h \
+    dialog_wailairen_add.h \
+    outschool.h \
+    wailairen.h \
+    formforoutsider.h \
+    formforoutschool.h \
+    formforwangui.h
 
 FORMS    += mainwindow.ui \
     student_information_edit_dialog.ui \
@@ -64,7 +76,11 @@ FORMS    += mainwindow.ui \
     mainwindow_data_manager.ui \
     dialog_dorm_edit.ui \
     dialog_user_info.ui \
-    dialog_user_show.ui
+    dialog_user_show.ui \
+    dialog_wailairen_add.ui \
+    formforoutsider.ui \
+    formforoutschool.ui \
+    formforwangui.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro

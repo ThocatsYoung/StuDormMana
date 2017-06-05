@@ -11,6 +11,8 @@ MainWindow::MainWindow(QString user,
     ui->setupUi(this);
 
     init_user_data();
+    init_tongzhi();
+
 //初始化数据结构
     init_list_of_dorm();
     init_set_of_dorm_number();
@@ -85,6 +87,14 @@ MainWindow::~MainWindow()
 void MainWindow::add_widget_to_tabwidget(QWidget *w ,QString title)
 {
     ui->TabWidget_manage->addTab(w,title);
+}
+
+void MainWindow::init_tongzhi()
+{
+    QString s;
+    read_file_to_container(path::_of_Tongzhi, s);
+    ui->textEdit_TongZhi->setText(s);
+    ui->textEdit_TongZhi->setReadOnly(true);
 }
 
 void MainWindow::init_user_data()

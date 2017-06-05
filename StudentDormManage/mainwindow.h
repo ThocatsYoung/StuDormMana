@@ -32,6 +32,7 @@ public:
     void add_widget_to_tabwidget(QWidget* w, QString title);
 
 //初始化数据结构
+    void init_tongzhi();
     void init_user_data();
     void init_list_of_dorm();
     void init_set_of_dorm_number();

@@ -430,7 +430,8 @@ QString MainWindow_data_manager::getDorm_building_name() const
 
 void MainWindow_data_manager::solt_for_action_tongzhi()
 {
-
+    Dialog_tongzhi *dialog = new Dialog_tongzhi(this);
+    dialog->exec();
 }
 
 void MainWindow_data_manager::solt_for_action_edit_mima()

@@ -15,6 +15,7 @@
 #include "dialog_dorm_edit.h"
 #include "dialog_user_show.h"
 #include "dialog_user_info.h"
+#include "dialog_tongzhi.h"
 
 namespace Ui {
 class MainWindow_data_manager;

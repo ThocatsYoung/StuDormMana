@@ -1,6 +1,6 @@
 #include "dialog_wailairen_add.h"
 #include "ui_dialog_wailairen_add.h"
-
+//改动
 dialog_wailairen_add::dialog_wailairen_add(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dialog_wailairen_add)

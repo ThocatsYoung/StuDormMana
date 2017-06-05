@@ -1,6 +1,9 @@
 #ifndef READ_FROM_FILE_H
 #define READ_FROM_FILE_H
 
+//测试 github 用注释
+//**************//
+
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -10,6 +13,7 @@
 #include <QMessageBox>
 
 #define DEBUG_TEST 0    //控制测试代码是否编译
+//测试GitHub功能
 
 //文件路径常量定义
 namespace  path {

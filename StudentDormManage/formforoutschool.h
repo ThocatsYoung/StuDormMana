@@ -18,7 +18,9 @@
 #include"people.h"
 #include"outschool.h"
 
-//model
+
+
+     //model离校登记模板
 class outschoollistmodel:public QAbstractTableModel
 {
     Q_OBJECT
@@ -27,23 +29,26 @@ public:
     ~outschoollistmodel();
 
     // Header:
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;//表头信息
 
     // Basic functionality:
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;     //计算行数
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;  //计算列数
 
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;//设置显示的信息
 
 
-    void setList_records(QList<outschool> *list_records);
-    void add_new_record(outschool new_record);
+    void setList_records(QList<outschool> *list_records);       //设置离校记录链表
+    void add_new_record(outschool new_record);                  //添加记录
 private:
-    QStringList headers;
-    QList<outschool> *m_list_records;
+    QStringList headers;                                     //表头
+    QList<outschool> *m_list_records;                        //离校记录链表
 
 };
 
+
+
+//ui离校记录ui界面
 namespace Ui {
 class Formforoutschool;
 }
@@ -69,12 +74,12 @@ private slots:
 
 private:
     Ui::Formforoutschool *ui;
-    QString file_path;
-    QString past_file_path;
+    QString file_path;            //离校记录文件路径
+    QString past_file_path;       //离校历史记录文件路径
     outschoollistmodel *model_records;    //model
     QList<outschool> data_records;  //当前记录
     QList<outschool> data_pastrecords;  //历史记录
-    QMap<QString, student*> *outmap;
+    QMap<QString, student*> *outmap;    //离校记录map
 };
 
 #endif // FORMFOROUTSCHOOL_H

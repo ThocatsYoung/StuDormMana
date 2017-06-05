@@ -6,11 +6,13 @@
 #include <QString>
 #include <QDataStream>
 
+
+//外来人员记录类
 class outsider
 {
 protected:
-    QString Name;
-    QString Contact;
+    QString Name;    //姓名
+    QString Contact;//联系方式
     QDateTime ComeTime; //来访时间
     QString IdNumber;   //身份证号
     quint16 m_sex;//性别
@@ -22,8 +24,8 @@ public:
     /*属性值获取函数*/
     const QString& GetName() const; //获取名字
     const QString& GetContact() const;  //获取联系方式
-    const QDateTime& GetComeTime() const;
-    const QString& GetIdNumber() const;//_____________________________________我加了个函数
+    const QDateTime& GetComeTime() const;//获得来访时间
+    const QString& GetIdNumber() const;//获得ID
     static QStringList sex_things;
     const quint16& get_sex() const;
 

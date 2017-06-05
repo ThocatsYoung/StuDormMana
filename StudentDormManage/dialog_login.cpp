@@ -29,6 +29,7 @@ Dialog_Login::Dialog_Login(QWidget *parent) :
     ui->lineEdit_user_name->setFocus();
 #endif
 
+    //当已存在宿管用户没有专属文件夹时建立
     QMapIterator<QString, QString> i(map_dorm_manager);
     while(i.hasNext()){
         create_dir_if_no_exist(i.next().key());
@@ -50,6 +51,7 @@ Dialog_Login::~Dialog_Login()
 void Dialog_Login::save_login_data()
 {
 #if DEBUG_TEST
+    //测试用
     qDebug() << "user names";
     QMapIterator<QString,QString> i(map_data_manager);
     while(i.hasNext()){
@@ -90,7 +92,7 @@ void Dialog_Login::on_pushButton_login_clicked()
         if(map_data_manager.contains(userid) &&
                  mima == map_data_manager.value(userid))
         {
-            login_type = 1;
+            login_type = 1; //调整静态数据值
             qDebug() << QString("%1").arg(login_type);
             this->accept();
             information_message_box("你已成功登录！");

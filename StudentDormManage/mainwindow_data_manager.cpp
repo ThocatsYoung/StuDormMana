@@ -66,16 +66,6 @@ MainWindow_data_manager::~MainWindow_data_manager()
 }
 
 
-void MainWindow_data_manager::setModel_dorm(DormListModel *value)
-{
-    model_dorm = value;
-}
-
-void MainWindow_data_manager::setModel_student(StudentListModel *value)
-{
-    model_student = value;
-}
-
 void MainWindow_data_manager::init_user_data()
 {
     //初始化登录人员数据(文件读写)
@@ -142,6 +132,8 @@ void MainWindow_data_manager::add_new_dorm_to_list(dorm value)
         warning_message_box("该宿舍已存在！");
         return;
     }
+
+    //查找应该添加宿舍的位置
     int i = 0;
     for(; i != m_list_of_dorm.count(); ++i){
         if (value < m_list_of_dorm.at(i))
@@ -149,11 +141,14 @@ void MainWindow_data_manager::add_new_dorm_to_list(dorm value)
             break;
         }
     }
+
+    //添加宿舍数据
     if (i == m_list_of_dorm.count()){
         m_list_of_dorm.append(value);
     }else{
         m_list_of_dorm.insert(i, value);
     }
+
     emit model_dorm->layoutChanged();
 
     set_of_dorm_number.insert(value.GetDormNumber());
@@ -333,11 +328,11 @@ void MainWindow_data_manager::on_pushButton_delete_dorm_clicked()
         return;
     }
 
-    int reply = QMessageBox::question(this,tr("询问"),tr("确定删除该宿舍？"),
-                          QMessageBox::Yes | QMessageBox::No);
-    if (reply == QMessageBox::Yes)
+    int reply = ask_yes_or_no("确定删除该宿舍？");
+    if (reply == true)
     {
         QList<student> *p = &(m_list_of_dorm.operator [](current_row).StuDorm);
+            //获取被删除宿舍de的学生链表指针
         for(QListIterator<student> i(*p); i.hasNext();)
         {
             m_map_find_by_student_id.remove(i.next().GetStudentId());
@@ -345,7 +340,7 @@ void MainWindow_data_manager::on_pushButton_delete_dorm_clicked()
         }
 
         m_list_of_dorm.removeAt(current_row);
-        emit ui->listView_dorm->model()->layoutChanged();
+        emit model_dorm->layoutChanged();
         ui->listView_dorm->clearFocus();
         model_student->set_student_list(NULL);
     }else{
@@ -365,7 +360,7 @@ void MainWindow_data_manager::on_pushButton_add_student_clicked()
     }
     dorm *pDorm = &(m_list_of_dorm.operator [](index));
     if (pDorm->StuDorm.count() >= pDorm->GetMaxNumber()){
-        QMessageBox::warning(this, tr("警告"), tr("当前宿舍人数已满"));
+        warning_message_box("当前宿舍人数已满");
         return;
     }
 
@@ -417,12 +412,11 @@ void MainWindow_data_manager::on_pushButton_delete_student_clicked()
         return;
     }
 
-    int reply = QMessageBox::question(this,tr("询问"),tr("确定移除该学生？"),
-                          QMessageBox::Yes | QMessageBox::No);
-    if (reply == QMessageBox::Yes){
+    bool reply = ask_yes_or_no("确定移除该学生？");
+    if (reply == true){
         m_map_find_by_student_id.remove(pStudent->GetStudentId());
         pDorm->goAway(index_student);
-        emit ui->tableView_student->model()->layoutChanged();
+        emit model_student->layoutChanged();
     }
     return;
 }

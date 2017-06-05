@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1093</width>
-    <height>658</height>
+    <width>1100</width>
+    <height>660</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,7 +55,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>备忘录</string>
+      <string>备忘记录：</string>
      </property>
     </widget>
     <widget class="Line" name="line">
@@ -311,7 +311,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1093</width>
+     <width>1100</width>
      <height>26</height>
     </rect>
    </property>

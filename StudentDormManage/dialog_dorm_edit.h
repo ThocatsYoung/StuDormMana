@@ -25,15 +25,16 @@ public:
 
 signals:
 
-    void send_new_dorm_info(dorm newDorm);
+    void send_new_dorm_info(dorm newDorm);  //发送新宿舍信息
 
 private slots:
-    void on_pushButton_ok_clicked();
+    void on_pushButton_ok_clicked();    //ok
 
-    void on_pushButton_cancel_clicked();
+    void on_pushButton_cancel_clicked();    //cancel
 
 private:
     Ui::Dialog_Dorm_Edit *ui;
+
     dorm *edit_dorm;    //被编辑的宿舍
     int edit_type;  //编辑类型，0为添加，1为修改
 };

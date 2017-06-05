@@ -29,21 +29,17 @@ public:
                                      QWidget *parent = 0);
     ~MainWindow_data_manager();
 
-
-    void setModel_dorm(DormListModel *value);
-    void setModel_student(StudentListModel *value);
-
 //初始化数据结构
-    void init_user_data();
-    void init_list_of_dorm();
-    void init_map_find_by_student_id();
-    void init_set_of_dorm_number();
+    void init_user_data();  //用户数据
+    void init_list_of_dorm();   //宿舍链表
+    void init_map_find_by_student_id(); //学生学号map
+    void init_set_of_dorm_number(); //宿舍号集合
 
-//保存宿舍信息
-    void save_user_data_to_file();
-    void save_dorm_data_to_file();
+//保存信息
+    void save_user_data_to_file();  //保存用户信息
+    void save_dorm_data_to_file();  //保存宿舍信息
 
-    QString getDorm_building_name() const;
+    QString getDorm_building_name() const;  //获取当前查看的宿舍楼名字（宿舍管理员帐号名）
 
 
 signals:
@@ -92,7 +88,7 @@ private:
 
     QString user_name;  //用户名
 
-    QString dorm_building_name;  //显示数据的宿舍楼名称
+    QString dorm_building_name;  //当前查看的宿舍楼名字（宿舍管理员帐号名）
 
     QList<dorm> m_list_of_dorm;    //指向宿舍链表
     QMap<QString, student*> m_map_find_by_student_id;  //以学号索引学生地址的map

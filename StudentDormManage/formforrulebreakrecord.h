@@ -69,12 +69,13 @@ private slots:
 
     void add_new_record(record_rulebreak new_record);
 
-    //这两个按钮名字忘记改了...outsider -> rule breaker
-    void on_pushButton_add_outsider_record_clicked();   //添加宿舍违纪记录
-    void on_pushButton_finish_outsider_record_clicked();    //删除宿舍违纪记录
+    void on_pushButton_add_rulebreaker_record_clicked();   //添加宿舍违纪记录
+    void on_pushButton_finish_rulebreaker_record_clicked();    //删除宿舍违纪记录
 
-    void on_pushButton_clicked();   //将当前记录移入历史记录 按钮忘记改成对应名字了 （注意）
+    void on_pushButton_remove_to_past_clicked();   //将当前记录移入历史记录
     void on_pushButton_show_past_clicked(); //展示历史记录
+
+    void on_pushButton_clear_past_clicked();    //清空历史记录
 
 private:
     Ui::FormForRuleBreakRecord *ui;
@@ -83,7 +84,7 @@ private:
     QString past_file_path; //历史记录文件路径
 
     QSet<quint16> *point_to_set_of_dorm_number;   //宿舍号集合
-    RuleBreakRecordModel *model_records;    //model
+    RuleBreakRecordModel *model_records;    //model 用于 tableView
     QList<record_rulebreak> data_records;  //宿舍违纪当前记录
     QList<record_rulebreak> data_pastrecords;  //宿舍违纪历史记录
 };

@@ -39,12 +39,12 @@ public:
 
 public slots:
 
-    void slot_to_set_student_list(QList<student> *sl);
+    void slot_to_set_student_list(QList<student> *sl);  //设置底层数据
 
 private:
     QStringList headers;
 
-    QList<student> *student_list;   //指向住宿学生数据
+    QList<student> *student_list;   //指向底层学生数据链表
 
 };
 

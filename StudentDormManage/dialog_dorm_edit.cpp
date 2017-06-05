@@ -12,11 +12,11 @@ Dialog_Dorm_Edit::Dialog_Dorm_Edit(int type, dorm *d,
     this->setWhatsThis("宿舍号为3位整数\n宿舍最大人数最多为20人");
 
     QDoubleValidator *of_edit_fee= new QDoubleValidator (0, 100, 1, this);
-
-
+    //限制水电费输入为0-100小数点后最多一位的小数
     ui->lineEdit_elec_fee->setValidator(of_edit_fee);
     ui->lineEdit_water_fee->setValidator(of_edit_fee);
 
+    //根据编辑类型设置 0为添加 1为修改
     switch(edit_type){
     case 0:
         for_add_dorm();break;
@@ -64,17 +64,13 @@ void Dialog_Dorm_Edit::for_edit_dorm()
 
     ui->lineEdit_max->setEnabled(true);
     ui->lineEdit_max->setText(QString("%1").arg(edit_dorm->GetMaxNumber()));
-    ui->lineEdit_max->setValidator(new QIntValidator(0, 20, this));
+    ui->lineEdit_max->setValidator(new QIntValidator(0, 40, this));
 
     ui->lineEdit_elec_fee->setEnabled(true);
     ui->lineEdit_water_fee->setEnabled(true);
     ui->lineEdit_elec_fee->setText(QString("%1").arg(edit_dorm->GetElecFee()));
     ui->lineEdit_water_fee->setText(QString("%1").arg(edit_dorm->GetWaterFee()));
 
-    //限制输入
-    QDoubleValidator *of_edit_fee= new QDoubleValidator (0, 100, 2, this);
-    ui->lineEdit_elec_fee->setValidator(of_edit_fee);
-    ui->lineEdit_water_fee->setValidator(of_edit_fee);
 }
 
 void Dialog_Dorm_Edit::on_pushButton_ok_clicked()
@@ -125,9 +121,7 @@ void Dialog_Dorm_Edit::on_pushButton_ok_clicked()
     if (reply != QMessageBox::Yes)
         return;
 
-    //进行数据修改
-
-
+    //文本-数据转化
     double wfee = wfee_text.toDouble();
     double efee = efee_text.toDouble();
 

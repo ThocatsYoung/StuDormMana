@@ -44,6 +44,8 @@ QString add_user_and_path(QString user, QString path);
 void warning_message_box(QString warn);
 //消息框提示消息
 void information_message_box(QString info);
+//消息框询问, 确定返回true 取消返回false
+bool ask_yes_or_no(QString s);
 
 //文件内容读入容器
 template <typename T>

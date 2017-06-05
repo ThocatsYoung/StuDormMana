@@ -28,7 +28,7 @@ public:
     void add_dorm(dorm value);  //添加新纪录到源数据
 
 private:
-    QList<dorm> *m_list_dorm;   //底层数据
+    QList<dorm> *m_list_dorm;   //底层数据 宿舍链表
 };
 
 

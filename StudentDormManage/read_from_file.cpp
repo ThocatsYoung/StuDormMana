@@ -74,8 +74,22 @@ void delete_dir_if_exist(QString path_dir)
     }
 }
 
-void information_message_box(QString info)
+void information_message_box(QString info)  // info 为具体信息
 {
     QMessageBox::information(0,QObject::tr("信息"),info);
     return;
+}
+
+bool ask_yes_or_no(QString s)   // s 为具体信息
+{
+    int reply = QMessageBox::information(NULL,QObject::tr("询问"),
+                                    s,
+                                    QObject::tr("确定"), QObject::tr("取消"), 0, 1);
+
+    //由于暂时未知原因，上面的0,1不可对调，故返回值实现如下
+    if (reply == 0){
+        return true;
+    }else{
+        return false;
+    }
 }

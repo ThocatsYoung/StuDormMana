@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>674</width>
-    <height>474</height>
+    <width>700</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>50</y>
-     <width>411</width>
-     <height>371</height>
+     <x>40</x>
+     <y>40</y>
+     <width>441</width>
+     <height>351</height>
     </rect>
    </property>
    <property name="alternatingRowColors">
@@ -29,37 +29,11 @@
     <bool>true</bool>
    </attribute>
   </widget>
-  <widget class="QPushButton" name="pushButton_add_outsider_record">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>70</y>
-     <width>71</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>添加记录</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_finish_outsider_record">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>140</y>
-     <width>71</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>删除记录</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_text_breakrule_record">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>20</y>
+     <x>20</x>
+     <y>10</y>
      <width>111</width>
      <height>16</height>
     </rect>
@@ -68,31 +42,90 @@
     <string>宿舍违纪记录：</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>300</y>
-     <width>131</width>
+     <x>110</x>
+     <y>420</y>
+     <width>321</width>
      <height>41</height>
     </rect>
    </property>
-   <property name="text">
-    <string>归入历史记录</string>
-   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton_show_past">
+      <property name="text">
+       <string>展示历史记录</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_clear_past">
+      <property name="text">
+       <string>清空历史记录</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="pushButton_show_past">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>370</y>
-     <width>131</width>
-     <height>41</height>
+     <x>510</x>
+     <y>70</y>
+     <width>160</width>
+     <height>281</height>
     </rect>
    </property>
-   <property name="text">
-    <string>展示历史记录</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButton_add_rulebreaker_record">
+      <property name="text">
+       <string>添加新违纪记录</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_finish_rulebreaker_record">
+      <property name="text">
+       <string>删除选中记录</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_remove_to_past">
+      <property name="text">
+       <string>归入历史记录</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

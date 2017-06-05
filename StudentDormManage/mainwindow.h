@@ -45,7 +45,7 @@ signals:
 
 private slots:
 
-    void on_SwitchPushButton_clicked();
+    void on_SwitchPushButton_clicked(); //切换界面
 
     void on_pushButton_to_dorm_clicked();   //跳转宿舍按钮槽函数
 
@@ -63,8 +63,8 @@ private:
     QString user_name;
 
     //宿舍楼数据
-    QList<dorm> m_list_of_dorm; //底层宿舍信息
-    QMap<QString, student*> m_map_find_by_student_id;   //以学号查找学生map
+    QList<dorm> m_list_of_dorm; //底层宿舍信息链表
+    QMap<QString, student*> m_map_find_by_student_id;   //学号-学生 map
     QSet<quint16> set_of_dorm_number;   //宿舍号set
 
     //model

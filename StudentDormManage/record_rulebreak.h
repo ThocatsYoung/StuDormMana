@@ -7,9 +7,10 @@
 //违纪记录类
 class record_rulebreak
 {
-    quint16 dorm_number;
-    quint16 breaked_rule;
-    QDate date;
+private:
+    quint16 dorm_number;    //违纪宿舍号
+    quint16 breaked_rule;   //违纪编号
+    QDate date; //日期
 public:
     record_rulebreak();
     record_rulebreak(quint16 a_dorm_number, quint16 a_breaked_rule,

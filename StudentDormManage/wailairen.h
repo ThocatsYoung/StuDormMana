@@ -25,16 +25,16 @@ public:
     const QString& GetName() const; //获取名字
     const QString& GetContact() const;  //获取联系方式
     const QDateTime& GetComeTime() const;//获得来访时间
-    const QString& GetIdNumber() const;//获得ID
-    static QStringList sex_things;
-    const quint16& get_sex() const;
+    const QString& GetIdNumber() const;//获取ID
+    static QStringList sex_things;//性别
+    const quint16& get_sex() const;//获取性别
 
     /*属性设置函数*/
     void SetName(const QString &NewName);   //设置名字
     void SetContact(const QString &NewContact); //设置联系方式
-    void SetComeTime(const QDateTime &cometime);
-    void SetIdNumber(const QString &idnumber);//——————————————————————————
-    void Setmsex(const quint16 &msex);
+    void SetComeTime(const QDateTime &cometime);//设置来访时间
+    void SetIdNumber(const QString &idnumber);//设置ID
+    void Setmsex(const quint16 &msex);//设置性别
     //输入输出运算符重载
     friend QDataStream &operator <<(QDataStream &out, const outsider &obj);
     friend QDataStream &operator >>(QDataStream &in, outsider &obj);

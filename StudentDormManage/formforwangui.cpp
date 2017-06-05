@@ -1,17 +1,21 @@
 #include "formforwangui.h"
 #include "ui_formforwangui.h"
-//model
+
+//model晚归登记模板实现
 wanguilistmodel::wanguilistmodel(QObject *parent):
     QAbstractTableModel(parent), m_list_records(NULL)
 {
-    headers <<"宿舍号"<< "姓名"  <<"晚归时间"<<"联系方式"<< "证件号";
+    headers <<"宿舍号"<< "姓名"  <<"晚归时间"<<"联系方式"<< "证件号";//表头信息
 }
 
+//析构函数
 wanguilistmodel::~wanguilistmodel()
 {
     m_list_records = NULL;
 }
 
+
+//表头
 QVariant wanguilistmodel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role != Qt::DisplayRole)
@@ -23,6 +27,7 @@ QVariant wanguilistmodel::headerData(int section, Qt::Orientation orientation, i
         return QVariant();
 }
 
+//计算行数
 int wanguilistmodel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid())
@@ -32,6 +37,7 @@ int wanguilistmodel::rowCount(const QModelIndex &parent) const
     return m_list_records->count();
 }
 
+//计算列数
 int wanguilistmodel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid())
@@ -39,6 +45,7 @@ int wanguilistmodel::columnCount(const QModelIndex &parent) const
     return headers.count();
 }
 
+//设置表格数据
 QVariant wanguilistmodel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
@@ -63,7 +70,7 @@ QVariant wanguilistmodel::data(const QModelIndex &index, int role) const
             return QString("%1").arg(p->GetName());//名字
             break;
         case 2:
-            return QString("%1").arg(p->GetOutTime().toString("yyyy-MM-dd--hh--mm"));
+            return QString("%1").arg(p->GetOutTime().toString("yyyy-MM-dd--hh--mm"));//晚归时间
             break;
         case 3:
             return QString("%1").arg(p->GetContact());//联系方式
@@ -82,17 +89,23 @@ QVariant wanguilistmodel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+//设置晚归记录链表
 void wanguilistmodel::setList_records(QList<outschool> *list_records)
 {
     m_list_records = list_records;
 }
 
+//添加晚归记录
 void wanguilistmodel::add_new_record(outschool new_record)
 {
     m_list_records->prepend(new_record);
     emit layoutChanged();
 }
-//ui
+
+
+
+
+//ui晚归记录界面实现
 Formforwangui::Formforwangui(QString path, QString past_path, QMap<QString, student*> *map, QWidget *parent) :
         file_path(path), past_file_path(past_path), outmap(map), model_records(NULL),QWidget(parent),
     ui(new Ui::Formforwangui)
@@ -115,6 +128,7 @@ Formforwangui::Formforwangui(QString path, QString past_path, QMap<QString, stud
     ui->tableView->setModel(model_records);
 }
 
+//析构函数
 Formforwangui::~Formforwangui()
 {
     write_container_to_file(data_records, file_path);
@@ -127,6 +141,8 @@ Formforwangui::~Formforwangui()
     delete ui;
 }
 
+
+//添加晚归记录
 void Formforwangui::on_pushButton_clicked()
 {
     QString IdNumber= ui->lineEdit->text();
@@ -156,6 +172,8 @@ void Formforwangui::on_pushButton_clicked()
     this->model_records->add_new_record(new_record);
 }
 
+
+//删除晚归记录
 void Formforwangui::on_pushButton_3_clicked()
 {
     if(ui->tableView->model()->rowCount() == 0)
@@ -175,7 +193,9 @@ void Formforwangui::on_pushButton_3_clicked()
         return;
 }
 
-void Formforwangui::on_pushButton_2_clicked()//写入记录
+
+//写入晚归历史记录
+void Formforwangui::on_pushButton_2_clicked()
 {
     if(ui->tableView->model()->rowCount() == 0)
     {
@@ -201,7 +221,9 @@ void Formforwangui::on_pushButton_2_clicked()//写入记录
         return;
 }
 
-void Formforwangui::on_pushButton_4_clicked()//显示记录
+
+//显示晚归历史记录
+void Formforwangui::on_pushButton_4_clicked()
 {
     QListWidget *listWidget_past_records = new QListWidget(this);
     listWidget_past_records->setFixedSize(500,400);

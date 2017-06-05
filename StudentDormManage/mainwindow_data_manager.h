@@ -47,6 +47,8 @@ signals:
     void send_point_of_student_list_to_model(QList<student> *p);
 
 private slots:
+    void solt_for_action_tongzhi(); //给宿管的通知信息
+
     void solt_for_action_edit_mima();   //修改密码动作触发
 
     void slot_for_action_manage_users();    //帐户管理动作触发

@@ -9,8 +9,8 @@ Dialog_Login::Dialog_Login(QWidget *parent) :
     this->setWindowTitle("学生宿舍管理系统--登录");
 
     //初始化登录人员数据(文件读写)
-    read_file_to_container(path_of_data_manager, map_data_manager);
-    read_file_to_container(path_of_dorm_manager, map_dorm_manager);
+    read_file_to_container(path::_of_data_manager, map_data_manager);
+    read_file_to_container(path::_of_dorm_manager, map_dorm_manager);
 
     //默认数据用户
     if (map_data_manager.empty())
@@ -63,8 +63,8 @@ void Dialog_Login::save_login_data()
     }
 #endif
     //写入容器
-    write_container_to_file(map_data_manager,path_of_data_manager);
-    write_container_to_file(map_dorm_manager,path_of_dorm_manager);
+    write_container_to_file(map_data_manager,path::_of_data_manager);
+    write_container_to_file(map_dorm_manager,path::_of_dorm_manager);
 }
 
 void Dialog_Login::clean_mima_edit()

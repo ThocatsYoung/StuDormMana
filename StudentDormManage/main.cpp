@@ -12,14 +12,34 @@
 #include "dialog_login.h"
 #include "mainwindow_data_manager.h"
 
+//界面美化为了省事代码上网找的
+//以下宏定义来自网络（一去丶二三里）
+#if defined(qApp)
+#undef qApp
+#endif
+#define qApp (static_cast<QApplication *>(QCoreApplication::instance()))
 
+class CommonHelper
+{
+//用于加载qss文件，这一部分代码来自网络
+public:
+    static void setStyle(const QString &style) {
+        QFile qss(style);
+        qss.open(QFile::ReadOnly);
+        qApp->setStyleSheet(qss.readAll());
+        qss.close();
+    }
+};
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    CommonHelper::setStyle("style.qss");    //该行代码来自网络
+
     student::Init_of_Xueyuan_and_BanJi();
+    //初始化静态student类数据成员用于与班级、学院编号对应
 
 
     //登录

@@ -2,6 +2,7 @@
 #define READ_FROM_FILE_H
 
 //测试 github 用注释
+//**************//
 
 #include <QFile>
 #include <QFileInfo>

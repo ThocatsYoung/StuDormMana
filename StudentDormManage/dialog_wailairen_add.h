@@ -7,6 +7,9 @@
 #include"wailairen.h"
 #include"people.h"
 
+
+
+//外来人员信息添加界面
 namespace Ui {
 class dialog_wailairen_add;
 }
@@ -19,11 +22,11 @@ public:
     explicit dialog_wailairen_add(QWidget *parent = 0);
     ~dialog_wailairen_add();
 signals:
-    void send_MSG_of_wailairen(outsider record);
+    void send_MSG_of_wailairen(outsider record);//发送外来人员信息修改的信号
 
 private slots:
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
+    void on_buttonBox_accepted();         //确认添加信息
+    void on_buttonBox_rejected();         //取消添加信息
 
 private:
     Ui::dialog_wailairen_add *ui;

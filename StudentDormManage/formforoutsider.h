@@ -17,6 +17,9 @@
 #include "wailairen.h"
 #include "dialog_wailairen_add.h"
 
+
+
+//model外来人员模板
 class wailairenlistmodel:public QAbstractTableModel
 {
     Q_OBJECT
@@ -25,25 +28,25 @@ public:
     ~wailairenlistmodel();
 
     // Header:
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;//设置表头
 
     // Basic functionality:
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;                               //计算行数
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;                            //计算列数
 
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;                   //设置表格数据
 
 
-    void setList_records(QList<outsider> *list_records);
-    void add_new_record(outsider new_record);
+    void setList_records(QList<outsider> *list_records);        //设置外来人员链表
+    void add_new_record(outsider new_record);                   //添加外来人员记录
 private:
-    QStringList headers;
-    QList<outsider> *m_list_records;
+    QStringList headers;             //表头数据
+    QList<outsider> *m_list_records;//外来人员链表
 
 };
 
 
-
+//ui外来人员界面
 namespace Ui {
 class FormForOutsider;
 }
@@ -66,9 +69,9 @@ private slots:
 
 private:
     Ui::FormForOutsider *ui;
-    QString file_path;
-    QString past_file_path;
-    wailairenlistmodel *model_records;    //model
+    QString file_path;                //外来人员文件路径
+    QString past_file_path;           //外来人员历史记录文件路径
+    wailairenlistmodel *model_records;    //model外来人
     QList<outsider> data_records;  //当前记录
     QList<outsider> data_pastrecords;  //历史记录
 

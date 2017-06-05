@@ -32,11 +32,13 @@ MainWindow_data_manager::MainWindow_data_manager(QString user,
     connect(this, send_message_for_dorm_find,
             this, find_dorm_in_listview_dorm);
 
-    //动作-槽 修改密码 帐户管理
+    //动作-槽 修改密码 帐户管理 通知
     connect(ui->action_edit_mima, QAction::triggered,
             this, solt_for_action_edit_mima);
     connect(ui->action_add_remove_users, QAction::triggered,
             this, slot_for_action_manage_users);
+    connect(ui->action_tongzhi, QAction::triggered,
+            this, solt_for_action_tongzhi);
 
     //设置查询编辑框只可输入数字
     QRegExp regx1("[1-9][0-9]{0,2}");   //第一位不可为0，限制3位数
@@ -69,8 +71,8 @@ MainWindow_data_manager::~MainWindow_data_manager()
 void MainWindow_data_manager::init_user_data()
 {
     //初始化登录人员数据(文件读写)
-    read_file_to_container(path_of_dorm_manager, map_dorm_manager);
-    read_file_to_container(path_of_data_manager, map_data_manager);
+    read_file_to_container(path::_of_dorm_manager, map_dorm_manager);
+    read_file_to_container(path::_of_data_manager, map_data_manager);
 
 }
 
@@ -80,7 +82,7 @@ void MainWindow_data_manager::init_list_of_dorm()
     if (dorm_building_name.isEmpty())
         return;
 
-    read_file_to_container(add_user_and_path(dorm_building_name, path_of_data_dorm),
+    read_file_to_container(add_user_and_path(dorm_building_name, path::_of_data_dorm),
                            m_list_of_dorm);
 
     ui->tableView_student->clearSelection();
@@ -116,14 +118,14 @@ void MainWindow_data_manager::init_set_of_dorm_number()
 
 void MainWindow_data_manager::save_user_data_to_file()
 {
-    write_container_to_file(map_data_manager, path_of_data_dorm);
-    write_container_to_file(map_dorm_manager, path_of_dorm_manager);
+    write_container_to_file(map_data_manager, path::_of_data_dorm);
+    write_container_to_file(map_dorm_manager, path::_of_dorm_manager);
 }
 
 void MainWindow_data_manager::save_dorm_data_to_file()
 {
     write_container_to_file (m_list_of_dorm,
-                             add_user_and_path(dorm_building_name, path_of_data_dorm));
+                             add_user_and_path(dorm_building_name, path::_of_data_dorm));
 }
 
 void MainWindow_data_manager::add_new_dorm_to_list(dorm value)
@@ -426,6 +428,12 @@ QString MainWindow_data_manager::getDorm_building_name() const
     return dorm_building_name;
 }
 
+void MainWindow_data_manager::solt_for_action_tongzhi()
+{
+    Dialog_tongzhi *dialog = new Dialog_tongzhi(this);
+    dialog->exec();
+}
+
 void MainWindow_data_manager::solt_for_action_edit_mima()
 {
     QString mima = map_data_manager.value(user_name);
@@ -454,7 +462,7 @@ void MainWindow_data_manager::slot_for_action_manage_users()
 void MainWindow_data_manager::edit_current_mima(QString mima)
 {
     map_data_manager[user_name] = mima;
-    write_container_to_file(map_data_manager, path_of_data_dorm);
+    write_container_to_file(map_data_manager, path::_of_data_dorm);
 }
 
 void MainWindow_data_manager::setDorm_building_name(const QString &value)

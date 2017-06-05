@@ -342,6 +342,7 @@
     </property>
     <addaction name="action_edit_mima"/>
     <addaction name="action_add_remove_users"/>
+    <addaction name="action_tongzhi"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -354,6 +355,11 @@
   <action name="action_add_remove_users">
    <property name="text">
     <string>宿舍管理员帐号管理</string>
+   </property>
+  </action>
+  <action name="action_tongzhi">
+   <property name="text">
+    <string>通知信息编辑</string>
    </property>
   </action>
  </widget>

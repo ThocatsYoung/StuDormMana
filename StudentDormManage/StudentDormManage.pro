@@ -44,7 +44,8 @@ SOURCES += main.cpp\
     dialog_wailairen_add.cpp \
     formforoutsider.cpp \
     formforoutschool.cpp \
-    formforwangui.cpp
+    formforwangui.cpp \
+    dialog_tongzhi.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
@@ -66,7 +67,8 @@ HEADERS  += mainwindow.h \
     wailairen.h \
     formforoutsider.h \
     formforoutschool.h \
-    formforwangui.h
+    formforwangui.h \
+    dialog_tongzhi.h
 
 FORMS    += mainwindow.ui \
     student_information_edit_dialog.ui \
@@ -80,7 +82,8 @@ FORMS    += mainwindow.ui \
     dialog_wailairen_add.ui \
     formforoutsider.ui \
     formforoutschool.ui \
-    formforwangui.ui
+    formforwangui.ui \
+    dialog_tongzhi.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro

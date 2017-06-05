@@ -11,6 +11,8 @@ MainWindow::MainWindow(QString user,
     ui->setupUi(this);
 
     init_user_data();
+    init_tongzhi();
+
 //初始化数据结构
     init_list_of_dorm();
     init_set_of_dorm_number();
@@ -33,31 +35,29 @@ MainWindow::MainWindow(QString user,
 
 //设置界面
 
-    ui->calendarWidget->setDateEditEnabled(false);
-    ui->calendarWidget->setSelectionMode(QCalendarWidget::NoSelection);    //日历不可编辑，只可查看
 
 //主界面添加窗口
     //离校登记界面
-    Formforoutschool *Form_outschool = new Formforoutschool(add_user_and_path(user_name, path_of_outschool_record),
-                                                            add_user_and_path(user_name,path_of_outschool_record_past),
+    Formforoutschool *Form_outschool = new Formforoutschool(add_user_and_path(user_name, path::_of_outschool_record),
+                                                            add_user_and_path(user_name,path::_of_outschool_record_past),
                                                             &m_map_find_by_student_id, this);
     this->add_widget_to_tabwidget(Form_outschool, "离校登记");
 
     //外访登记界面
-    FormForOutsider *Form_outsider = new FormForOutsider(add_user_and_path(user_name, path_of_wailairen_record),
-                                                         add_user_and_path(user_name,path_of_wailairen_record_past));
+    FormForOutsider *Form_outsider = new FormForOutsider(add_user_and_path(user_name, path::_of_wailairen_record),
+                                                         add_user_and_path(user_name,path::_of_wailairen_record_past));
     this->add_widget_to_tabwidget(Form_outsider, "外访人员登记");
 
     //晚归登记界面
-    Formforwangui *Form_wangui = new Formforwangui(add_user_and_path(user_name, path_of_wangui_record),
-                                                   add_user_and_path(user_name, path_of_wangui_record_past),
+    Formforwangui *Form_wangui = new Formforwangui(add_user_and_path(user_name, path::_of_wangui_record),
+                                                   add_user_and_path(user_name, path::_of_wangui_record_past),
                                                    &m_map_find_by_student_id);
     this->add_widget_to_tabwidget(Form_wangui, "晚归登记");
 
     //宿舍违纪登记界面
     FormForRuleBreakRecord *Form_rulebreak = new FormForRuleBreakRecord
-            (add_user_and_path(user_name, path_of_rulebreak_record),
-             add_user_and_path(user_name, path_of_rulebreak_record_past),
+            (add_user_and_path(user_name, path::_of_rulebreak_record),
+             add_user_and_path(user_name, path::_of_rulebreak_record_past),
              &set_of_dorm_number,this);
     this->add_widget_to_tabwidget(Form_rulebreak, "宿舍违纪记录");
 
@@ -89,9 +89,17 @@ void MainWindow::add_widget_to_tabwidget(QWidget *w ,QString title)
     ui->TabWidget_manage->addTab(w,title);
 }
 
+void MainWindow::init_tongzhi()
+{
+    QString s;
+    read_file_to_container(path::_of_Tongzhi, s);
+    ui->textEdit_TongZhi->setText(s);
+    ui->textEdit_TongZhi->setReadOnly(true);
+}
+
 void MainWindow::init_user_data()
 {
-    read_file_to_container(path_of_dorm_manager, map_dorm_manager);
+    read_file_to_container(path::_of_dorm_manager, map_dorm_manager);
 }
 
 
@@ -133,11 +141,16 @@ void MainWindow::on_pushButton_find_by_stuid_clicked()
 {
     QString student_id = ui->lineEdit_stuid->text();
     if(student_id.isEmpty())
-        warning_message_box("查询学生学号不可为空！");
-    if(!(m_map_find_by_student_id.contains(student_id)))
-        warning_message_box("查询学生学号不存在！");
-    else
     {
+        warning_message_box("查询学生学号不可为空！");
+        return;
+    }
+
+    if(!(m_map_find_by_student_id.contains(student_id)))
+    {
+        warning_message_box("查询学生学号不存在！");
+        return;
+    }else{
         //展示学生信息
         student *stu = (m_map_find_by_student_id)[student_id];
         QMessageBox::information(this, tr("学生信息"), stu->toString());
@@ -201,7 +214,7 @@ void MainWindow::init_list_of_dorm()
     m_list_of_dorm.clear();
     if (user_name.isEmpty())
         return;
-    read_file_to_container(add_user_and_path(user_name, path_of_data_dorm),
+    read_file_to_container(add_user_and_path(user_name, path::_of_data_dorm),
                            m_list_of_dorm);
 }
 

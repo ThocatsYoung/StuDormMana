@@ -59,7 +59,7 @@ void Dialog_user_show::add_user(QString user, QString mima)
         return;
     }
     point_to_map_dorm_manager->insert(user, mima);  //数据结构添加
-    write_container_to_file(*point_to_map_dorm_manager, path_of_dorm_manager);  //写入文件
+    write_container_to_file(*point_to_map_dorm_manager, path::_of_dorm_manager);  //写入文件
     create_dir_if_no_exist(user);   //创建文件夹
     ui->listWidget_user->addItem(user);
 }
@@ -87,7 +87,7 @@ void Dialog_user_show::on_pushButton_delete_data_clicked()
         QString user = item->text();
         delete item;
         point_to_map_dorm_manager->remove(user);    //map中删除
-        write_container_to_file(*point_to_map_dorm_manager, path_of_dorm_manager);  //写入文件
+        write_container_to_file(*point_to_map_dorm_manager, path::_of_dorm_manager);  //写入文件
         delete_dir_if_exist(user);  //删除文件夹
 
     }else{

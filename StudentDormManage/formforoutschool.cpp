@@ -1,11 +1,11 @@
 #include "formforoutschool.h"
 #include "ui_formforoutschool.h"
 
-//model
+//model离校登记
 outschoollistmodel::outschoollistmodel(QObject *parent):
     QAbstractTableModel(parent), m_list_records(NULL)
 {
-    headers << "姓名" << "宿舍号"  << "学号" << "联系方式" << "离校日期";
+    headers << "姓名" << "宿舍号"  << "学号" << "联系方式" << "离校日期";//表头信息
 }
 
 outschoollistmodel::~outschoollistmodel()
@@ -24,6 +24,7 @@ QVariant outschoollistmodel::headerData(int section, Qt::Orientation orientation
         return QVariant();
 }
 
+//计算行数
 int outschoollistmodel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid())
@@ -33,6 +34,7 @@ int outschoollistmodel::rowCount(const QModelIndex &parent) const
     return m_list_records->count();
 }
 
+//计算列数
 int outschoollistmodel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid())
@@ -40,6 +42,7 @@ int outschoollistmodel::columnCount(const QModelIndex &parent) const
     return headers.count();
 }
 
+//设置表格数据
 QVariant outschoollistmodel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
@@ -70,7 +73,7 @@ QVariant outschoollistmodel::data(const QModelIndex &index, int role) const
             return QString("%1").arg(p->GetContact());//联系方式
             break;
         case 4:
-            return QString("%1").arg(p->GetOutTime().toString("yyyy-MM-dd"));
+            return QString("%1").arg(p->GetOutTime().toString("yyyy-MM-dd"));//时间
             break;
         default:
             return QVariant();
@@ -83,11 +86,15 @@ QVariant outschoollistmodel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+
+//设置离校记录链表
 void outschoollistmodel::setList_records(QList<outschool> *list_records)
 {
     m_list_records = list_records;
 }
 
+
+//添加离校记录
 void outschoollistmodel::add_new_record(outschool new_record)
 {
     m_list_records->prepend(new_record);
@@ -95,7 +102,9 @@ void outschoollistmodel::add_new_record(outschool new_record)
 }
 
 
-//UI
+
+
+//UI离校登记界面实现
 Formforoutschool::Formforoutschool(QString path, QString past_path, QMap<QString, student*> *map, QWidget *parent) :
     file_path(path), past_file_path(past_path),
     outmap(map), model_records(NULL),QWidget(parent),
@@ -118,6 +127,8 @@ Formforoutschool::Formforoutschool(QString path, QString past_path, QMap<QString
     ui->tableView->setModel(model_records);
 }
 
+
+//析构函数
 Formforoutschool::~Formforoutschool()
 {
     //保存记录
@@ -132,7 +143,9 @@ Formforoutschool::~Formforoutschool()
     delete ui;
 }
 
-void Formforoutschool::on_pushButton_clicked()//添加离校记录
+
+//添加离校记录
+void Formforoutschool::on_pushButton_clicked()
 {
     if(ui->lineEdit->text().isEmpty())
     {
@@ -162,7 +175,9 @@ void Formforoutschool::on_pushButton_clicked()//添加离校记录
 
 }
 
-void Formforoutschool::on_pushButton_2_clicked()//删除显示项
+
+//删除显示项
+void Formforoutschool::on_pushButton_2_clicked()
 {
     if(ui->tableView->model()->rowCount() == 0)
     {
@@ -181,7 +196,9 @@ void Formforoutschool::on_pushButton_2_clicked()//删除显示项
         return;
 }
 
-void Formforoutschool::on_pushButton_3_clicked()//写入历史记录
+
+//写入历史记录
+void Formforoutschool::on_pushButton_3_clicked()
 {
     if(ui->tableView->model()->rowCount() == 0)
     {
@@ -207,7 +224,9 @@ void Formforoutschool::on_pushButton_3_clicked()//写入历史记录
         return;
 }
 
-void Formforoutschool::on_pushButton_4_clicked()//显示历史记录
+
+//显示历史记录
+void Formforoutschool::on_pushButton_4_clicked()
 {
     QListWidget *listWidget_past_records = new QListWidget(this);
     listWidget_past_records->setFixedSize(500,400);

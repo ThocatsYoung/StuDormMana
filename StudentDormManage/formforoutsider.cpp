@@ -1,13 +1,15 @@
 #include "formforoutsider.h"
 #include "ui_formforoutsider.h"
 
-//model
+//model外来人员模板实现
 wailairenlistmodel::wailairenlistmodel(QObject *parent):
     QAbstractTableModel(parent), m_list_records(NULL)
 {
-    headers << "姓名" << "性别" << "学号" << "联系方式" << "日期";
+    headers << "姓名" << "性别" << "学号" << "联系方式" << "日期";//设置表头
 }
 
+
+//析构函数
 wailairenlistmodel::~wailairenlistmodel()
 {
     m_list_records = NULL;
@@ -24,6 +26,8 @@ QVariant wailairenlistmodel::headerData(int section, Qt::Orientation orientation
         return QVariant();
 }
 
+
+//计算行数
 int wailairenlistmodel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid())
@@ -33,6 +37,8 @@ int wailairenlistmodel::rowCount(const QModelIndex &parent) const
     return m_list_records->count();
 }
 
+
+//计算列数
 int wailairenlistmodel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid())
@@ -40,6 +46,8 @@ int wailairenlistmodel::columnCount(const QModelIndex &parent) const
     return headers.count();
 }
 
+
+//设置表格数据
 QVariant wailairenlistmodel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
@@ -71,7 +79,7 @@ QVariant wailairenlistmodel::data(const QModelIndex &index, int role) const
             return QString("%1").arg(p->GetContact());//联系方式
             break;
         case 4:
-            return QString("%1").arg(p->GetComeTime().toString("yyyy-MM-dd"));
+            return QString("%1").arg(p->GetComeTime().toString("yyyy-MM-dd"));//时间
             break;
         default:
             return QVariant();
@@ -84,11 +92,14 @@ QVariant wailairenlistmodel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+//设置外来人员记录链表
 void wailairenlistmodel::setList_records(QList<outsider> *list_records)
 {
     m_list_records = list_records;
 }
 
+
+//添加外来人员记录
 void wailairenlistmodel::add_new_record(outsider new_record)
 {
     m_list_records->prepend(new_record);
@@ -98,7 +109,7 @@ void wailairenlistmodel::add_new_record(outsider new_record)
 
 
 
-//ui
+//ui外来人员界面实现
 FormForOutsider::FormForOutsider(QString path, QString past_path,  QWidget *parent) :
     file_path(path), past_file_path(past_path), model_records(NULL), QWidget(parent),
     ui(new Ui::FormForOutsider)
@@ -120,6 +131,8 @@ FormForOutsider::FormForOutsider(QString path, QString past_path,  QWidget *pare
     ui->tableView->setModel(model_records);
 }
 
+
+//析构函数
 FormForOutsider::~FormForOutsider()
 {
     //保存当前违纪记录数据
@@ -131,15 +144,17 @@ FormForOutsider::~FormForOutsider()
     delete model_records;
 }
 
-
+//添加外来人员来访记录
 void FormForOutsider::on_pushButton_add_outsider_record_clicked()
 {
-    dialog_wailairen_add *dialog = new dialog_wailairen_add(this);
+    dialog_wailairen_add *dialog = new dialog_wailairen_add(this);//添加外来人员记录的对话框
     connect(dialog, dialog_wailairen_add::send_MSG_of_wailairen,
-            this->model_records, wailairenlistmodel::add_new_record);
+            this->model_records, wailairenlistmodel::add_new_record);//信号槽函数
     dialog->exec();
 }
 
+
+//删除外访记录
 void FormForOutsider::on_pushButton_finish_outsider_record_clicked()
 {
     if(ui->tableView->model()->rowCount() == 0)
@@ -159,7 +174,9 @@ void FormForOutsider::on_pushButton_finish_outsider_record_clicked()
         return;
 }
 
-void FormForOutsider::on_pushButton_clicked()    //将当前记录移入历史记录
+
+//将当前记录移入历史记录
+void FormForOutsider::on_pushButton_clicked()
 {
     if(ui->tableView->model()->rowCount() == 0)
     {
@@ -185,7 +202,9 @@ void FormForOutsider::on_pushButton_clicked()    //将当前记录移入历史�
         return;
 }
 
-void FormForOutsider::on_pushButton_show_past_clicked()  //展示历史记录
+
+//展示历史记录
+void FormForOutsider::on_pushButton_show_past_clicked()
 {
     QListWidget *listWidget_past_records = new QListWidget(this);
     listWidget_past_records->setFixedSize(500,400);

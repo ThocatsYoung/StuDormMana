@@ -8,6 +8,7 @@ dialog_wailairen_add::dialog_wailairen_add(QWidget *parent) :
     ui(new Ui::dialog_wailairen_add)
 {
     ui->setupUi(this);
+    this->setWindowTitle("添加外来人员");
 
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
     //设置补全框

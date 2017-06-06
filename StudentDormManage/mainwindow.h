@@ -16,6 +16,9 @@
 #include "formforoutsider.h"
 #include "formforwangui.h"
 
+#include "goods_record_show.h"
+#include "dorm_repair_show.h"
+
 namespace Ui {
 class MainWindow;
 }

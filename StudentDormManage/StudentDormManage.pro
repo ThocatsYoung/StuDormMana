@@ -45,7 +45,14 @@ SOURCES += main.cpp\
     formforoutsider.cpp \
     formforoutschool.cpp \
     formforwangui.cpp \
-    dialog_tongzhi.cpp
+    dialog_tongzhi.cpp \
+    goods.cpp \
+    goodsrecord_add.cpp \
+    goods_record_show.cpp \
+    dialog_addgoods.cpp \
+    dorm_repair.cpp \
+    dorm_repair_show.cpp \
+    dialog_addrepair.cpp
 
 HEADERS  += mainwindow.h \
     people.h \
@@ -68,7 +75,14 @@ HEADERS  += mainwindow.h \
     formforoutsider.h \
     formforoutschool.h \
     formforwangui.h \
-    dialog_tongzhi.h
+    dialog_tongzhi.h \
+    goods.h \
+    goodsrecord_add.h \
+    goods_record_show.h \
+    dialog_addgoods.h \
+    dorm_repair.h \
+    dorm_repair_show.h \
+    dialog_addrepair.h
 
 FORMS    += mainwindow.ui \
     student_information_edit_dialog.ui \
@@ -83,7 +97,12 @@ FORMS    += mainwindow.ui \
     formforoutsider.ui \
     formforoutschool.ui \
     formforwangui.ui \
-    dialog_tongzhi.ui
+    dialog_tongzhi.ui \
+    goodsrecord_add.ui \
+    goods_record_show.ui \
+    dialog_addgoods.ui \
+    dorm_repair_show.ui \
+    dialog_addrepair.ui
 
 SUBDIRS += \
     ../StudentClass/StudentClass.pro

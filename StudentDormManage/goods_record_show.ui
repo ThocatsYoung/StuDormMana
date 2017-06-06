@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FormForOutsider</class>
- <widget class="QWidget" name="FormForOutsider">
+ <class>goods_record_show</class>
+ <widget class="QWidget" name="goods_record_show">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,28 +13,34 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QTableView" name="tableView_goodrecord">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>30</y>
-     <width>72</width>
-     <height>15</height>
+     <x>240</x>
+     <y>20</y>
+     <width>441</width>
+     <height>351</height>
     </rect>
    </property>
-   <property name="text">
-    <string>来访信息：</string>
-   </property>
+   <attribute name="horizontalHeaderStretchLastSection">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
   </widget>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTableView" name="tableView_goods">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>50</y>
-     <width>631</width>
-     <height>321</height>
+     <x>20</x>
+     <y>20</y>
+     <width>180</width>
+     <height>351</height>
     </rect>
    </property>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>58</number>
+   </attribute>
    <attribute name="horizontalHeaderStretchLastSection">
     <bool>true</bool>
    </attribute>
@@ -45,24 +51,24 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>20</x>
      <y>400</y>
-     <width>611</width>
-     <height>41</height>
+     <width>631</width>
+     <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QPushButton" name="pushButton_add_outsider_record">
+     <widget class="QPushButton" name="pushButton_addgoods">
       <property name="text">
-       <string>添加来访人</string>
+       <string>添加物品</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_finish_outsider_record">
+     <widget class="QPushButton" name="pushButton_2_deletegoods">
       <property name="text">
-       <string>删除来访人</string>
+       <string>删除物品</string>
       </property>
      </widget>
     </item>
@@ -80,16 +86,16 @@
      </spacer>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pushButton_back">
       <property name="text">
-       <string>添加至历史来访记录</string>
+       <string>确认归还</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_show_past">
+     <widget class="QPushButton" name="pushButton_scan_goodshistory">
       <property name="text">
-       <string>显示历史来访记录</string>
+       <string>查看归还记录</string>
       </property>
      </widget>
     </item>

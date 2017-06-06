@@ -54,6 +54,19 @@ MainWindow::MainWindow(QString user,
                                                    &m_map_find_by_student_id);
     this->add_widget_to_tabwidget(Form_wangui, "晚归登记");
 
+    //宿舍物品管理
+    goods_record_show *Form_goods = new goods_record_show(add_user_and_path(user_name, path::_of_goodsrecord),
+                                                          add_user_and_path(user_name, path::_of_goodsrecord_past),
+                                                          add_user_and_path(user_name, path::_of_goods),
+                                                          this);
+    this->add_widget_to_tabwidget(Form_goods, "宿舍公用物品管理");
+
+    //宿舍维修记录管理
+    dorm_repair_show *Form_repair = new dorm_repair_show(add_user_and_path(user_name, path::_of_dorm_repair),
+                                                         add_user_and_path(user_name, path::_of_dorm_repair_record),
+                                                         this);
+    this->add_widget_to_tabwidget(Form_repair, "宿舍维修");
+
     //宿舍违纪登记界面
     FormForRuleBreakRecord *Form_rulebreak = new FormForRuleBreakRecord
             (add_user_and_path(user_name, path::_of_rulebreak_record),

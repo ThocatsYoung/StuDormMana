@@ -17,22 +17,28 @@
 //文件路径常量定义
 namespace  path {
 
-const QString _of_Tongzhi("message_to_dorm_managers.dat");  //通知栏信息编辑
+const QString _of_Tongzhi("message_to_dorm_managers.sdm");  //通知栏信息编辑
 
-const QString _of_data_manager("data_manager.dat");   //住宿信息管理人员信息
-const QString _of_dorm_manager("dorm_manager.dat");   //宿舍管理员信息
+const QString _of_data_manager("data_manager.sdm");   //住宿信息管理人员信息
+const QString _of_dorm_manager("dorm_manager.sdm");   //宿舍管理员信息
 
-const QString _of_data_dorm("information_of_dorms.dat");    //宿舍信息
+const QString _of_data_dorm("information_of_dorms.sdm");    //宿舍信息
 
-const QString _of_rulebreak_record("rulebreak_record.dat"); //宿舍违纪记录
-const QString _of_rulebreak_record_past("rulebreak_record_past.dat");       //宿舍违纪历史记录
+const QString _of_rulebreak_record("rulebreak_record.sdm"); //宿舍违纪记录
+const QString _of_rulebreak_record_past("rulebreak_record_past.sdm");       //宿舍违纪历史记录
 
-const QString _of_wailairen_record("wailairen_record.dat");     //外访信息
-const QString _of_wailairen_record_past("wailairen_record_past.dat");       //历史外访信息
-const QString _of_outschool_record("outschool_record.dat");     //离校信息
-const QString _of_outschool_record_past("outschool_record_past.dat");       //历史离校信息
-const QString _of_wangui_record("wangui_record.dat");       //晚归信息
-const QString _of_wangui_record_past("wangui_record_past.dat");     //历史晚归信息
+const QString _of_wailairen_record("wailairen_record.sdm");     //外访信息
+const QString _of_wailairen_record_past("wailairen_record_past.sdm");       //历史外访信息
+const QString _of_outschool_record("outschool_record.sdm");     //离校信息
+const QString _of_outschool_record_past("outschool_record_past.sdm");       //历史离校信息
+const QString _of_wangui_record("wangui_record.sdm");       //晚归信息
+const QString _of_wangui_record_past("wangui_record_past.sdm");     //历史晚归信息
+
+const QString _of_goodsrecord("goodsrecord.sdm");
+const QString _of_goodsrecord_past("goodsrecord_past.sdm");
+const QString _of_goods("goods.sdm");
+const QString _of_dorm_repair("dorm_repair.sdm");
+const QString _of_dorm_repair_record("dorm_repair_record.sdm");
 }
 
 

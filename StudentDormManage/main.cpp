@@ -12,6 +12,8 @@
 #include "dialog_login.h"
 #include "mainwindow_data_manager.h"
 
+#include <QSplashScreen>
+
 //界面美化为了省事代码上网找的
 //以下宏定义来自网络（一去丶二三里）
 #if defined(qApp)
@@ -25,9 +27,14 @@ class CommonHelper
 public:
     static void setStyle(const QString &style) {
         QFile qss(style);
+        if (!qss.exists())
+        {//界面美化文件不存在时返回
+            return;
+        }
         qss.open(QFile::ReadOnly);
         qApp->setStyleSheet(qss.readAll());
         qss.close();
+        return;
     }
 };
 
@@ -44,12 +51,12 @@ int main(int argc, char *argv[])
 
     //登录
     Dialog_Login login;
+
     if(login.exec() != QDialog::Accepted)
     {
         return 0;
     }
     //登陆后将改变 静态成员数据 用户名 user_Name
-
 
     //创建宿舍管理主窗口
     if(Dialog_Login::login_type == 0)   //宿管登录
@@ -60,6 +67,7 @@ int main(int argc, char *argv[])
 
         //显示窗口
         w.show();
+
         return a.exec();
 
     }else{
@@ -67,9 +75,11 @@ int main(int argc, char *argv[])
         if(Dialog_Login::login_type == 1)
         {
             MainWindow_data_manager d(Dialog_Login::user_Name);
+
             d.setFixedSize(1000, 530);
             d.setWindowTitle("学生宿舍管理系统--住宿数据管理员界面");
             d.show();
+
             return a.exec();
         }
         else

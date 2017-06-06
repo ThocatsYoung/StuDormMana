@@ -6,6 +6,7 @@ Dialog_tongzhi::Dialog_tongzhi(QWidget *parent) :
     ui(new Ui::Dialog_tongzhi)
 {
     ui->setupUi(this);
+    this->setWindowTitle("通知编辑");
 
     QString current_tongzhi;
     read_file_to_container(path::_of_Tongzhi, current_tongzhi);

@@ -5,7 +5,7 @@
 wanguilistmodel::wanguilistmodel(QObject *parent):
     QAbstractTableModel(parent), m_list_records(NULL)
 {
-    headers <<"宿舍号"<< "姓名"  <<"晚归时间"<<"联系方式"<< "证件号";//表头信息
+    headers << "宿舍号" << "姓名" << "晚归时间" << "联系方式"<< "学号";//表头信息
 }
 
 //析构函数
@@ -76,7 +76,7 @@ QVariant wanguilistmodel::data(const QModelIndex &index, int role) const
             return QString("%1").arg(p->GetContact());//联系方式
             break;
         case 4:
-            return QString("%1").arg(p->GetIdNumber());//证件号
+            return QString("%1").arg(p->GetIdNumber());//学号
             break;
         default:
             return QVariant();
@@ -231,7 +231,7 @@ void Formforwangui::on_pushButton_4_clicked()
     while(i.hasNext())
     {
         const outschool *p = &(i.next());
-        QString s = "离校时间："+QString("%1").arg(p->GetOutTime().toString("yyyy-MM-dd--hh-mm"))
+        QString s = "离校时间："+QString("%1").arg(p->GetOutTime().toString("yyyy-MM-dd-hh-mm"))
                 +"    "+QString("%1").arg(p->GetName())
                 +"    "+"宿舍号："+QString("%1").arg(p->GetDormNumber())
                 +"    "+"联系方式："+QString("%1").arg(p->GetContact())
